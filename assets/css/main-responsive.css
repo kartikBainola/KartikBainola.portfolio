@@ -1,0 +1,152 @@
+/* Base styles */
+html {
+    font-size: 16px; /* Set a base font size for better scaling */
+  }
+  
+  body {
+    font-family: 'Playfair Display', serif;
+    font-weight: 300;
+    font-style: normal;
+    color: #fff;
+    background: #0c0c0c;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  /* Sections */
+  .hero,
+  .portfolio,
+  .about,
+  .portfolio-item-a,
+  .portfolio-item-b,
+  .footer {
+    padding: 0 30px; /* Add some padding for smaller screens */
+  }
+  
+  /* Headings */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Playfair Display', serif;
+    font-weight: normal;
+    color: #fff;
+  }
+  
+  h1 {
+    font-size: 2.5rem; /* Adjust font sizes for mobile readability */
+  }
+  
+  h2 {
+    font-size: 2rem;
+  }
+  
+  h3 {
+    font-size: 1.8rem;
+  }
+  
+  h4 {
+    font-size: 1.6rem;
+  }
+  
+  h5 {
+    font-size: 1.4rem;
+  }
+  
+  h6 {
+    font-size: 1.2rem;
+  }
+  
+  /* Paragraphs */
+  p {
+    font-size: 1rem;
+    line-height: 1.5; /* Adjust line-height for better spacing */
+  }
+  
+  /* Links */
+  a,
+  a:hover,
+  a:focus {
+    cursor: pointer;
+    -webkit-transition: all 300ms ease;
+    -o-transition: all 300ms ease;
+    transition: all 300ms ease;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: #fff;
+  }
+  
+  /* Navigation Button */
+  .navigation-button {
+    position: fixed;
+    top: 10%;
+    right: 0;
+    z-index: 10;
+    cursor: pointer;
+    transform: translateY(-50%); /* Center vertically */
+  }
+  
+  .navigation-button p {
+    font-size: 1.2rem; /* Adjust font size for mobile readability */
+    padding: 0.8em 2em 0.8em 1.2em; /* Adjust padding for smaller screens */
+    letter-spacing: 0.01em;
+    color: #111;
+    border-top-left-radius: 100px;
+    border-bottom-left-radius: 100px;
+    background: #fff;
+  }
+  
+  /* Preloader */
+  /* No changes needed for preloader responsiveness */
+  
+  /* Hero Section */
+  .hero {
+    position: relative; /* Removed fixed positioning for better mobile layout */
+    height: auto; /* Allow hero section to adjust to content height */
+  }
+  
+  .hero .front-content .container-mid {
+    transform: translateY(-50%); /* Center vertically */
+    text-align: center; /* Ensure content stays centered */
+  }
+  
+  /* Media queries for responsive adjustments */
+  @media (max-width: 768px) {
+    /* Adjust styles for smaller screens */
+  
+    /* Navigation Button */
+    .navigation-button {
+      display: none; /* Hide navigation button on small screens */
+    }
+  
+    /* Hero Section */
+    .hero .front-content .container-mid h1 {
+      font-size: 2rem; /* Adjust heading size */
+    }
+  
+    .hero .front-content .container-mid p.subline {
+      font-size: 2rem; /* Adjust subline size */
+    }
+  }
+  
+  /* Portfolio Section */
+  .portfolio .item {
+    max-width: 100%; /* Allow items to fill the width on smaller screens */
+  }
+  
+  .portfolio .item:hover i {
+    opacity: 0.8; /* Reduce hover opacity for better visibility */
+  }
+  
+  /* Footer Section */
+  .footer {
+    text-align: center; /* Ensure content stays centered */
+  }
+  
+  .footer p {
+    font-size: 0.9rem; /* Adjust font size for mobile readability */
+    margin-right: 1rem; /* Adjust margin for better spacing*/
+ } 
