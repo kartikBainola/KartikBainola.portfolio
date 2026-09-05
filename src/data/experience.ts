@@ -1,0 +1,105 @@
+import type { Experience } from "@/types";
+
+export const experiences: Experience[] = [
+  {
+    id: "mindrops",
+    company: "Mindrops Solution Pvt Ltd",
+    role: "Mobile App Developer",
+    period: "Feb 2025 — Present",
+    location: "Pitampura, Delhi",
+    description:
+      "Developing and publishing production Flutter applications for Android and iOS, working across state management, animations, deep links, and native feature integrations.",
+    responsibilities: [
+      "Published several apps on Android and iOS with smooth performance and clean UI",
+      "Worked on state handling, animations, deep links, and native platform features",
+      "Built a Face Recognition application with camera and ML integrations",
+      "Developed a full e-commerce app with improved design and useful features",
+      "Integrated REST APIs, Firebase, and third-party services",
+      "Optimized app performance and managed Play Store & App Store releases",
+    ],
+    technologies: [
+      "Flutter",
+      "Dart",
+      "Riverpod",
+      "Firebase",
+      "REST APIs",
+      "Deep Linking",
+      "Face Recognition",
+    ],
+  },
+  {
+    id: "valuevertex",
+    company: "ValueVertex Solutions",
+    role: "Junior Mobile App Developer",
+    period: "Nov 2024 — Feb 2025",
+    location: "Dehradun, Uttarakhand (Remote)",
+    description:
+      "Managed all phases of mobile application development, ensuring seamless UI/UX optimization and on-time project delivery.",
+    responsibilities: [
+      "Managed end-to-end mobile application development lifecycle",
+      "Ensured seamless UI/UX optimization across all screen sizes",
+      "Solved technical challenges to deliver projects on time and within budget",
+      "Integrated backend APIs and Firebase services",
+      "Implemented responsive layouts and reusable widget components",
+      "Collaborated with cross-functional teams on feature delivery",
+    ],
+    technologies: [
+      "Flutter",
+      "Dart",
+      "Firebase",
+      "REST APIs",
+      "Responsive UI",
+      "Git",
+    ],
+  },
+  {
+    id: "resoluteai",
+    company: "ResoluteAI Software Pvt Ltd",
+    role: "Junior Mobile Application Developer",
+    period: "Nov 2024 — Feb 2025",
+    location: "Dehradun, Uttarakhand (Remote)",
+    description:
+      "Contributed to all stages of Flutter development, enhancing user experience with performance optimizations and efficient problem-solving.",
+    responsibilities: [
+      "Contributed to all stages of mobile application development",
+      "Enhanced user experience with performance optimizations",
+      "Addressed technical challenges efficiently for timely project completion",
+      "Implemented state management patterns with Bloc and Riverpod",
+      "Built responsive UI components with custom animations",
+      "Integrated push notifications and authentication flows",
+    ],
+    technologies: [
+      "Flutter",
+      "Dart",
+      "Bloc",
+      "Riverpod",
+      "Firebase",
+      "Push Notifications",
+    ],
+  },
+  {
+    id: "save-efforts",
+    company: "Save Efforts LLC",
+    role: "Junior Mobile App Developer",
+    period: "Aug 2024 — Sep 2024",
+    location: "Dehradun, Uttarakhand (Remote)",
+    description:
+      "Built responsive Flutter UIs and developed a hybrid database application integrating diverse technologies for efficient data management.",
+    responsibilities: [
+      "Built responsive UIs in Flutter with scalable styling approaches",
+      "Developed a hybrid database application with multi-technology integration",
+      "Implemented efficient data management and local storage solutions",
+      "Completed Mobile App Development Internship program",
+      "Collaborated on UI/UX design and feature implementation",
+      "Delivered project milestones within internship timeline",
+    ],
+    technologies: [
+      "Flutter",
+      "Dart",
+      "SQLite",
+      "REST APIs",
+      "Responsive UI",
+      "Git",
+    ],
+  },
+];

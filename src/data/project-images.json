@@ -1,0 +1,60 @@
+{
+  "ventuera": {
+    "icon": "/images/projects/ventuera-icon.png",
+    "screenshot": "/images/projects/ventuera-promo-1.png",
+    "screenshots": [
+      "/images/projects/ventuera-promo-1.png",
+      "/images/projects/ventuera-promo-2.png",
+      "/images/projects/ventuera-promo-3.png",
+      "/images/projects/ventuera-promo-4.png"
+    ]
+  },
+  "capto": {
+    "icon": "/images/projects/capto-icon.png",
+    "screenshot": "/images/projects/capto-screenshot.png",
+    "screenshots": [
+      "/images/projects/capto-screenshot.png",
+      "/images/projects/capto-screenshot-2.png",
+      "/images/projects/capto-screenshot-3.png",
+      "/images/projects/capto-screenshot-4.png",
+      "/images/projects/capto-screenshot-5.png",
+      "/images/projects/capto-screenshot-6.png"
+    ]
+  },
+  "my-professional-rewards": {
+    "icon": "/images/projects/my-professional-rewards-icon.png",
+    "screenshot": "/images/projects/my-professional-rewards-promo-1.png",
+    "screenshots": [
+      "/images/projects/my-professional-rewards-promo-1.png",
+      "/images/projects/my-professional-rewards-promo-2.png",
+      "/images/projects/my-professional-rewards-promo-3.png",
+      "/images/projects/my-professional-rewards-promo-4.png"
+    ]
+  },
+  "vrv-hospitality": {
+    "icon": "/images/projects/vrv-hospitality-icon.png",
+    "screenshot": "/images/projects/vrv-hospitality-screenshot-3.png",
+    "screenshots": [
+      "/images/projects/vrv-hospitality-screenshot-3.png"
+    ]
+  },
+  "expense-management": {
+    "icon": "/images/projects/expense-management-icon.png",
+    "screenshot": "/images/projects/expense-management-screenshot-2.png",
+    "screenshots": [
+      "/images/projects/expense-management-screenshot-2.png"
+    ]
+  },
+  "footprint-warehousing": {
+    "icon": "/images/projects/footprint-warehousing-icon.png",
+    "screenshot": "/images/projects/footprint-warehousing-screenshot-2.png",
+    "screenshots": [
+      "/images/projects/footprint-warehousing-screenshot-2.png"
+    ]
+  },
+  "sardar-meat-shop": {
+    "icon": "/images/projects/sardar-meat-shop-icon.png",
+    "screenshot": "/images/projects/sardar-meat-shop-icon.png",
+    "screenshots": []
+  }
+}
