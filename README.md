@@ -11,10 +11,10 @@ A premium, modern personal portfolio website built with Next.js 15, showcasing F
 - **UI Components:** Shadcn-style custom components
 - **Icons:** Lucide React
 - **Forms:** React Hook Form + Zod
-- **Email:** Resend API
+- **Email:** Resend via Cloudflare Worker
 - **Smooth Scroll:** Lenis
 - **Blog:** MDX with next-mdx-remote
-- **Deployment:** Vercel
+- **Deployment:** GitHub Pages (static export)
 
 ## Getting Started
 
@@ -36,7 +36,6 @@ Open [http://localhost:3000](http://localhost:3000) to view the portfolio.
 ```
 src/
 ├── app/                  # Next.js App Router pages
-│   ├── api/contact/      # Contact form API route
 │   ├── blog/             # Blog pages
 │   ├── layout.tsx        # Root layout with SEO
 │   ├── page.tsx          # Home page
@@ -53,6 +52,8 @@ src/
 ├── data/                 # Static data (projects, skills, etc.)
 ├── lib/                  # Utilities, SEO, blog helpers
 └── types/                # TypeScript type definitions
+workers/
+└── contact/              # Cloudflare Worker (Resend contact API)
 ```
 
 ## Customization
@@ -64,18 +65,24 @@ Update `src/lib/constants.ts` and `src/data/` files with your details.
 Change `freelanceUrl` in `src/lib/constants.ts` to your freelance website URL.
 
 ### Contact Form
+GitHub Pages cannot run a Next.js API route. Contact email uses a **Cloudflare Worker** + Resend.
+
 1. Copy env template: `cp .env.example .env.local`
-2. Create a free [Resend](https://resend.com) API key and set `RESEND_API_KEY`
-3. Keep `CONTACT_EMAIL=kartikbainola1303@gmail.com` (already set)
+2. Deploy the worker:
+   ```bash
+   cd workers/contact
+   npx wrangler login
+   npx wrangler secret put RESEND_API_KEY
+   npx wrangler deploy
+   ```
+3. Set `NEXT_PUBLIC_CONTACT_API_URL` in `.env.local` to the worker URL
+4. In GitHub → **Settings → Secrets and variables → Actions**, add the same `NEXT_PUBLIC_CONTACT_API_URL` secret (used by the Pages build)
 
-**Local:** use `RESEND_FROM_EMAIL=Portfolio <onboarding@resend.dev>` (Resend test sender). Submissions go to your Resend account email until a domain is verified.
-
-**Production (Vercel):** add the same vars in Project → Settings → Environment Variables for Production (and Preview if you want). After verifying a domain in Resend, set e.g. `RESEND_FROM_EMAIL=Portfolio <noreply@yourdomain.com>`.
-
-If Resend is unavailable or the key is missing, the form falls back to the visitor’s `mailto:` client.
+Keep `CONTACT_EMAIL` / `RESEND_FROM_EMAIL` on the worker (`wrangler.toml` / Cloudflare dashboard).  
+If the worker URL is missing or Resend fails, the form falls back to `mailto:`.
 
 ### Resume
-Place your resume PDF at `public/resume.pdf`.
+Place your resume PDF at `public/KartikBainola_2026_resume.pdf`.
 
 ### Projects
 Edit `src/data/projects.ts` to add your real projects with store links.
@@ -95,23 +102,21 @@ Edit `src/data/projects.ts` to add your real projects with store links.
 - Full SEO (Open Graph, Schema.org, sitemap)
 - Responsive across all devices
 
-## Deployment
+## Deployment (GitHub Pages)
 
-Deploy to Vercel:
+1. Push to `main` (workflow: `.github/workflows/deploy.yml`)
+2. Repo → **Settings → Pages** → Source: **GitHub Actions**
+3. Add Actions secret: `NEXT_PUBLIC_CONTACT_API_URL` = your Cloudflare Worker URL
+4. Site URL: `https://kartikbainola.github.io/KartikBainola.portfolio/`
+
+Local static build (same as CI):
 
 ```bash
-npm run build
+# Windows PowerShell
+$env:GITHUB_PAGES="true"; npm run build
 ```
 
-Or connect your GitHub repository to [Vercel](https://vercel.com) for automatic deployments.
-
-Set these environment variables in Vercel (Production + Preview):
-
-| Variable | Value |
-|---|---|
-| `RESEND_API_KEY` | Your Resend API key |
-| `CONTACT_EMAIL` | `kartikbainola1303@gmail.com` |
-| `RESEND_FROM_EMAIL` | Verified sender, e.g. `Portfolio <noreply@yourdomain.com>` |
+Worker secrets (Resend) live in **Cloudflare**, not in GitHub Pages env — Pages has no server at runtime.
 
 ## License
 

@@ -17,6 +17,7 @@ import { MagneticButton } from "@/components/animations/magnetic-button";
 import { FadeIn } from "@/components/animations/fade-in";
 import { profile } from "@/data/profile";
 import { SITE_CONFIG, SOCIAL_LINKS } from "@/lib/constants";
+import { withBasePath } from "@/lib/utils";
 import { AmbientBackground } from "@/components/effects/ambient-background";
 import { SimpleImageCarousel } from "@/components/ui/simple-image-carousel";
 import { heroApps } from "@/data/hero-apps";
@@ -138,7 +139,7 @@ export function HeroSection() {
                 </MagneticButton>
                 <MagneticButton>
                   <Button asChild size="lg" variant="secondary" className="group relative overflow-hidden">
-                    <a href={SITE_CONFIG.resumeUrl} download data-cursor="button">
+                    <a href={withBasePath(SITE_CONFIG.resumeUrl)} download data-cursor="button">
                       <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
                       <Download className="h-4 w-4" />
                       Download Resume

@@ -1,0 +1,13 @@
+name = "portfolio-contact"
+main = "src/index.ts"
+compatibility_date = "2024-11-01"
+
+# Non-secret defaults (override in Cloudflare dashboard if needed)
+[vars]
+CONTACT_EMAIL = "kartikbainola1303@gmail.com"
+RESEND_FROM_EMAIL = "Portfolio <onboarding@resend.dev>"
+# Comma-separated browser origins allowed to call this worker
+ALLOWED_ORIGINS = "http://localhost:3000,http://127.0.0.1:3000,https://kartikbainola.github.io"
+
+# Set secret after deploy:
+#   npx wrangler secret put RESEND_API_KEY

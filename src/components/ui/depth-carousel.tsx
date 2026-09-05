@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import gsap from "gsap";
+import { withBasePath } from "@/lib/utils";
 import "./depth-carousel.css";
 
 export type DepthCarouselItem = string | {
@@ -152,7 +153,7 @@ function CardMedia({ item, active }: { item: NormalizedItem; active: boolean }) 
       <video
         ref={videoRef}
         className="depth-carousel__img hero-app-video"
-        poster={item.image || undefined}
+        poster={item.image ? withBasePath(item.image) : undefined}
         muted
         loop
         playsInline
@@ -163,12 +164,19 @@ function CardMedia({ item, active }: { item: NormalizedItem; active: boolean }) 
         aria-hidden="true"
         tabIndex={-1}
       >
-        <source src={item.video} type="video/webm" />
+        <source src={withBasePath(item.video)} type="video/webm" />
       </video>
     );
   }
 
-  return <img className="depth-carousel__img" src={item.image} alt={item.alt || ""} draggable={false} />;
+  return (
+    <img
+      className="depth-carousel__img"
+      src={withBasePath(item.image)}
+      alt={item.alt || ""}
+      draggable={false}
+    />
+  );
 }
 
 export default function DepthCarousel({

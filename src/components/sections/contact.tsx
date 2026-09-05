@@ -15,6 +15,7 @@ import { Label } from "@/components/ui/label";
 import { CopyEmailButton } from "@/components/ui/copy-email-button";
 import { MagneticButton } from "@/components/animations/magnetic-button";
 import { SITE_CONFIG, SOCIAL_LINKS } from "@/lib/constants";
+import { withBasePath } from "@/lib/utils";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -50,8 +51,18 @@ export function ContactSection() {
   const onSubmit = async (data: ContactForm) => {
     setIsSubmitting(true);
     setSubmitError(null);
+
+    const endpoint = process.env.NEXT_PUBLIC_CONTACT_API_URL?.trim();
+
+    // Static GitHub Pages has no Next.js API — use Cloudflare Worker URL, or mailto.
+    if (!endpoint) {
+      openMailtoFallback(data);
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -64,7 +75,6 @@ export function ContactSection() {
         return;
       }
 
-      // Missing Resend key / service down — fall back to the user's mail client
       if (response.status === 503 || response.status >= 500) {
         openMailtoFallback(data);
         return;
@@ -150,7 +160,7 @@ export function ContactSection() {
 
               <MagneticButton>
                 <Button asChild variant="outline" className="group relative overflow-hidden">
-                  <a href={SITE_CONFIG.resumeUrl} download data-cursor="button">
+                  <a href={withBasePath(SITE_CONFIG.resumeUrl)} download data-cursor="button">
                     <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
                     <Download className="h-4 w-4" />
                     Download Resume

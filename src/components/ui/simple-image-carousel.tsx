@@ -3,7 +3,7 @@
 import React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { cn, withBasePath } from "@/lib/utils";
 
 // --- TYPES ---
 export interface CarouselItem {
@@ -73,7 +73,7 @@ function CardMedia({
       <video
         ref={videoRef}
         className="w-full h-full object-cover object-top"
-        poster={item.poster}
+        poster={item.poster ? withBasePath(item.poster) : undefined}
         muted
         loop
         playsInline
@@ -84,14 +84,14 @@ function CardMedia({
         aria-hidden="true"
         tabIndex={-1}
       >
-        <source src={item.video} type="video/webm" />
+        <source src={withBasePath(item.video)} type="video/webm" />
       </video>
     );
   }
 
   return (
     <img
-      src={item.poster}
+      src={item.poster ? withBasePath(item.poster) : undefined}
       alt={item.alt}
       className="w-full h-full object-cover object-top"
       draggable={false}

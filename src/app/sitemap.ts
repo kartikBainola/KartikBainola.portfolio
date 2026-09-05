@@ -3,6 +3,8 @@ import { SITE_CONFIG } from "@/lib/constants";
 import { getAllPosts } from "@/lib/blog";
 import { projects } from "@/data/projects";
 
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const posts = getAllPosts();
 
