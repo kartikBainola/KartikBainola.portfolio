@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { FadeIn } from "@/components/animations/fade-in";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { profile, aboutTimeline } from "@/data/profile";
@@ -50,10 +51,8 @@ export function AboutSection() {
               {/* Avatar + name block */}
               <div className="flex items-center gap-4">
                 <div className="relative">
-                  <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-accent-blue via-accent-purple to-accent-cyan p-0.5">
-                    <div className="flex h-full w-full items-center justify-center rounded-[14px] bg-card text-xl font-black text-foreground">
-                      KB
-                    </div>
+                  <div className="h-16 w-16 rounded-2xl overflow-hidden">
+                    <Image src="/kb-mark.png" alt="KB" width={64} height={64} className="object-contain bg-transparent" />
                   </div>
                   {/* open to work badge */}
                   <div className="absolute -bottom-1.5 -right-1.5 rounded-full border border-accent-emerald/40 bg-background px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-accent-emerald">

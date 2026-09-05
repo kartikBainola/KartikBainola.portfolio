@@ -83,6 +83,7 @@ export function ProjectCaseStudy({ project, nextProject }: ProjectCaseStudyProps
                     src={image}
                     alt={`${project.title} screenshot ${index + 1}`}
                     fill
+                    unoptimized
                     sizes="(max-width: 1024px) 50vw, 30vw"
                     className={project.screenshotStyle === "poster" ? "object-cover" : "object-cover object-top"}
                   />

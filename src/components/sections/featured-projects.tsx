@@ -109,6 +109,7 @@ export function FeaturedProjectsSection() {
                                       src={screenshot}
                                       alt={`${project.title} screenshot ${shotIndex + 1}`}
                                       fill
+                                      unoptimized
                                       sizes="(max-width: 640px) 120px, 160px"
                                       className={
                                         isPoster

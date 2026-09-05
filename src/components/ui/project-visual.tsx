@@ -55,6 +55,7 @@ export function ProjectVisual({
               alt={`${title} logo`}
               width={180}
               height={180}
+              unoptimized
               className={cn(
                 "h-[78%] w-auto object-contain transition-transform duration-700 group-hover:scale-105",
                 isDarkLogo
@@ -70,6 +71,7 @@ export function ProjectVisual({
             src={displayImage}
             alt={`${title} preview`}
             fill
+            unoptimized
             className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
             sizes={isFeatured ? "(max-width: 768px) 100vw, 33vw" : "300px"}
           />
@@ -99,7 +101,7 @@ export function ProjectVisual({
       <div className="absolute top-4 left-4 z-10 flex items-center gap-2.5">
         {icon && !isLogoHeader && (
           <div className="relative h-9 w-9 overflow-hidden rounded-xl shadow-lg ring-2 ring-white/20">
-            <Image src={icon} alt="" fill className="object-cover" sizes="36px" />
+            <Image src={icon} alt="" fill className="object-cover" sizes="36px" unoptimized />
           </div>
         )}
         {category && (

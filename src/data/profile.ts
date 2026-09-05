@@ -27,7 +27,7 @@ My work spans education platforms, enterprise rewards systems, AI-powered financ
 export const stats: Stat[] = [
   { label: "Apps Published", value: 7, suffix: "+" },
   { label: "Years Experience", value: 3, suffix: "+" },
-  { label: "Companies", value: 4, suffix: "" },
+  { label: "Companies", value: 4, suffix: "+" },
   { label: "CGPA", value: 7.85, suffix: "" },
 ];
 

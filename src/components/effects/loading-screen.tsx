@@ -7,9 +7,13 @@ import { useReducedMotionPreference } from "@/lib/use-reduced-motion";
 export function LoadingScreen() {
   const [isLoading, setIsLoading] = useState(true);
   const [progress, setProgress] = useState(0);
+  const [mounted, setMounted] = useState(false);
   const reducedMotion = useReducedMotionPreference();
 
   useEffect(() => {
+    // avoid rendering the loading UI during SSR (prevents showing "0%")
+    setMounted(true);
+
     const duration = reducedMotion ? 320 : 1200;
     const start = performance.now();
     let frame = 0;
@@ -41,7 +45,7 @@ export function LoadingScreen() {
 
   return (
     <AnimatePresence>
-      {isLoading && (
+      {mounted && isLoading && (
         <motion.div
           initial={{ opacity: 1 }}
           exit={{

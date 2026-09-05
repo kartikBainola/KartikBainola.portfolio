@@ -82,17 +82,16 @@ export function HeroSection() {
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-emerald opacity-60" />
                   <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-accent-emerald" />
                 </span>
-                <span className="font-semibold text-accent-emerald">Available for freelance</span>
+                <span className="font-semibold text-accent-emerald">🟢 Available for freelance projects</span>
                 <span className="text-muted-foreground/40">·</span>
-                <MapPin className="h-3.5 w-3.5 text-muted-foreground" />
-                <span className="text-muted-foreground text-xs">{profile.location}</span>
+                <span className="text-muted-foreground text-xs">Replies within 24 hours</span>
               </div>
             </FadeIn>
 
             {/* Eyebrow */}
             <FadeIn delay={0.2}>
               <p className="mb-3 text-sm font-semibold tracking-[0.3em] text-muted-foreground uppercase">
-                Mobile Application Developer
+                FLUTTER ENGINEER & MOBILE APP DEVELOPER
               </p>
             </FadeIn>
 
@@ -112,7 +111,7 @@ export function HeroSection() {
                   <TypewriterRole />
                 </p>
                 <p className="text-base text-muted-foreground sm:text-lg">
-                  {profile.subtitle}
+                  Flutter • Android • iOS • Firebase • REST APIs • AI/OCR
                 </p>
               </div>
             </FadeIn>

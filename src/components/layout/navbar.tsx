@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sun, Moon, Laptop } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -53,9 +54,8 @@ export function Navbar() {
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-8">
         {/* Logo */}
         <Link href="/" className="group flex items-center gap-2.5" data-cursor-hover>
-          <div className="relative h-8 w-8 rounded-lg overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-accent-blue to-accent-purple transition-all duration-300 group-hover:scale-110" />
-            <span className="relative flex h-full w-full items-center justify-center text-xs font-black text-white">KB</span>
+            <div className="relative h-8 w-8 rounded-lg overflow-hidden">
+            <Image src="/kb-mark.png" alt="KB" fill className="object-contain" />
           </div>
           <span className="text-base font-bold tracking-tight">Kartik Bainola</span>
         </Link>

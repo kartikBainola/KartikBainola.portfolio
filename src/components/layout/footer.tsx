@@ -27,9 +27,7 @@ export function Footer() {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-emerald opacity-60" />
             <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-accent-emerald" />
           </span>
-          <p className="text-sm font-semibold text-accent-emerald">
-            Available for freelance projects & collaborations
-          </p>
+          <p className="text-sm font-semibold text-accent-emerald">🟢 Available for freelance projects</p>
           <Link
             href="#contact"
             className="rounded-full border border-accent-emerald/40 bg-accent-emerald/10 px-3 py-1 text-xs font-bold text-accent-emerald transition-all hover:bg-accent-emerald/20"
@@ -42,9 +40,8 @@ export function Footer() {
           {/* Brand */}
           <div>
             <Link href="/" className="flex items-center gap-2.5 group">
-              <div className="relative h-9 w-9 rounded-lg overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-accent-blue to-accent-purple" />
-                <span className="relative flex h-full w-full items-center justify-center text-xs font-black text-white">KB</span>
+            <div className="relative h-9 w-9 rounded-lg overflow-hidden">
+                <img src="/kb-mark.png" alt="KB" className="h-full w-full object-contain" />
               </div>
               <span className="text-base font-bold">{SITE_CONFIG.name}</span>
             </Link>
@@ -105,11 +102,6 @@ export function Footer() {
         <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
           <p className="text-xs text-muted-foreground">
             © {currentYear} {SITE_CONFIG.name}. All rights reserved.
-          </p>
-          <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
-            Built with{" "}
-            <Heart className="h-3 w-3 fill-accent-rose text-accent-rose animate-pulse" />
-            {" "}using Next.js · Tailwind · Framer Motion
           </p>
         </div>
       </div>

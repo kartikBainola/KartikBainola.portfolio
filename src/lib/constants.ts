@@ -1,8 +1,8 @@
 export const SITE_CONFIG = {
   name: "Kartik Bainola",
-  title: "Mobile Application Developer | Flutter Engineer",
+  title: "Flutter Engineer & Mobile App Developer",
   description:
-    "Mobile Application Developer with 3+ years of experience specializing in Flutter, Android, iOS, and Flutter Web. Published production apps on Google Play Store and Apple App Store across education, finance, e-commerce, and enterprise solutions.",
+    "Kartik Bainola is a Flutter Engineer building production-ready Android, iOS and cross-platform applications with Flutter, Firebase, REST APIs and AI integrations.",
   url: "https://kartikbainola.dev",
   email: "kartikbainola1303@gmail.com",
   phone: "+91 76689 34850",
@@ -25,6 +25,6 @@ export const NAV_LINKS = [
   { label: "Skills", href: "#skills" },
   { label: "Projects", href: "#projects" },
   { label: "Services", href: "#services" },
-  { label: "Blog", href: "/blog" },
+  // { label: "Blog", href: "/blog" }, // hidden for now
   { label: "Contact", href: "#contact" },
 ] as const;
