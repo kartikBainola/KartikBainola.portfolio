@@ -52,7 +52,7 @@ export function AboutSection() {
               <div className="flex items-center gap-4">
                 <div className="relative">
                   <div className="h-16 w-16 rounded-2xl overflow-hidden">
-                    <Image src="/kb-mark.png" alt="KB" width={64} height={64} className="object-contain bg-transparent" />
+                    <Image src="kb-mark.png" alt="KB" width={64} height={64} className="object-contain bg-transparent" />
                   </div>
                   {/* open to work badge */}
                   <div className="absolute -bottom-1.5 -right-1.5 rounded-full border border-accent-emerald/40 bg-background px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-accent-emerald">

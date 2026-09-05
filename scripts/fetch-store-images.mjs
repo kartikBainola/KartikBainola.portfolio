@@ -120,7 +120,7 @@ async function main() {
 
       if (data.icon) {
         await downloadImage(data.icon, path.join(outDir, `${app.id}-icon.png`));
-        manifest[app.id] = { icon: `/images/projects/${app.id}-icon.png` };
+        manifest[app.id] = { icon: `images/projects/${app.id}-icon.png` };
       }
 
       const candidates = await pickBestScreenshot(data.screenshots, app.id);
@@ -128,13 +128,13 @@ async function main() {
 
       if (best[0]) {
         fs.copyFileSync(best[0].path, path.join(outDir, `${app.id}-screenshot.png`));
-        manifest[app.id].screenshot = `/images/projects/${app.id}-screenshot.png`;
-        manifest[app.id].screenshots = [`/images/projects/${app.id}-screenshot.png`];
+        manifest[app.id].screenshot = `images/projects/${app.id}-screenshot.png`;
+        manifest[app.id].screenshots = [`images/projects/${app.id}-screenshot.png`];
 
         for (let i = 1; i < best.length; i++) {
           const name = `${app.id}-screenshot-${i + 1}.png`;
           fs.copyFileSync(best[i].path, path.join(outDir, name));
-          manifest[app.id].screenshots.push(`/images/projects/${name}`);
+          manifest[app.id].screenshots.push(`images/projects/${name}`);
         }
       }
 

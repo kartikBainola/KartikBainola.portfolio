@@ -55,7 +55,7 @@ export function Navbar() {
         {/* Logo */}
         <Link href="/" className="group flex items-center gap-2.5" data-cursor-hover>
             <div className="relative h-8 w-8 rounded-lg overflow-hidden">
-            <Image src="/kb-mark.png" alt="KB" fill className="object-contain" />
+            <Image src="kb-mark.png" alt="KB" fill className="object-contain" />
           </div>
           <span className="text-base font-bold tracking-tight">Kartik Bainola</span>
         </Link>
