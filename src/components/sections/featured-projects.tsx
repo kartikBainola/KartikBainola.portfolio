@@ -15,13 +15,13 @@ export function FeaturedProjectsSection() {
   const featured = projects.filter((project) => project.featured);
 
   return (
-    <section id="projects" className="relative py-24 sm:py-32 bg-card/30">
+    <section id="projects" className="relative overflow-hidden bg-card/30 py-16 sm:py-24 lg:py-32">
       {/* Background glow */}
       <div className="pointer-events-none absolute inset-x-0 top-1/2 flex -translate-y-1/2 justify-center">
         <div className="h-[600px] w-[800px] rounded-full bg-accent-blue/4 blur-[140px]" />
       </div>
 
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           label="Selected Work"
           title="Production Applications"
@@ -36,7 +36,7 @@ export function FeaturedProjectsSection() {
                 className="group relative overflow-hidden rounded-3xl border border-border bg-card/90 transition-all duration-500 hover:border-accent-blue/30 hover:shadow-[0_20px_80px_rgba(0,0,0,0.4)]"
               >
                 {/* Project number — large faded */}
-                <span className="pointer-events-none absolute right-6 top-4 select-none text-[8rem] font-black leading-none text-foreground/[0.03] sm:text-[10rem]">
+                <span className="pointer-events-none absolute right-6 top-4 hidden select-none text-[8rem] font-black leading-none text-foreground/[0.03] sm:block sm:text-[10rem]">
                   {String(index + 1).padStart(2, "0")}
                 </span>
 
@@ -79,7 +79,7 @@ export function FeaturedProjectsSection() {
                           />
                           <div className="absolute inset-0 grid-pattern opacity-30" />
 
-                          <div className="relative flex h-full items-end justify-center gap-3 px-5 pt-12 sm:gap-4 sm:px-6">
+                          <div className="relative flex h-full items-end justify-center gap-2 px-3 pt-10 sm:gap-4 sm:px-6 sm:pt-12">
                             {screenshots.map((screenshot, shotIndex) => {
                               const isPoster = project.screenshotStyle === "poster";
                               return (
@@ -93,11 +93,11 @@ export function FeaturedProjectsSection() {
                                   data-cursor="image"
                                   className={
                                     isPoster
-                                      ? `relative w-[118px] overflow-hidden rounded-2xl border border-white/10 bg-zinc-900 shadow-2xl shadow-black/50 sm:w-[158px] ${
-                                          shotIndex === 1 ? "mb-8 z-20" : "mb-2 opacity-95"
+                                      ? `relative w-[72px] overflow-hidden rounded-2xl border border-white/10 bg-zinc-900 shadow-2xl shadow-black/50 sm:w-[118px] md:w-[158px] ${
+                                          shotIndex === 1 ? "mb-6 z-20 sm:mb-8" : "mb-1 opacity-95 sm:mb-2"
                                         }`
-                                      : `relative w-[120px] overflow-hidden rounded-[1.4rem] border-[4px] border-zinc-800 bg-zinc-900 shadow-2xl shadow-black/40 sm:w-[145px] ${
-                                          shotIndex === 1 ? "mb-10 z-20" : "mb-2 opacity-90"
+                                      : `relative w-[74px] overflow-hidden rounded-[1.4rem] border-[3px] border-zinc-800 bg-zinc-900 shadow-2xl shadow-black/40 sm:w-[120px] sm:border-[4px] md:w-[145px] ${
+                                          shotIndex === 1 ? "mb-6 z-20 sm:mb-10" : "mb-1 opacity-90 sm:mb-2"
                                         }`
                                   }
                                 >
@@ -128,11 +128,11 @@ export function FeaturedProjectsSection() {
                   </div>
 
                   {/* ── Content area ──────────────────────── */}
-                  <div className={`flex flex-col justify-center p-7 sm:p-10 ${index % 2 === 1 ? "lg:order-1" : ""}`}>
+                  <div className={`flex flex-col justify-center p-5 sm:p-10 ${index % 2 === 1 ? "lg:order-1" : ""}`}>
                     <p className="text-xs font-bold tracking-[0.22em] uppercase text-muted-foreground">
                       {project.category}
                     </p>
-                    <h3 className="mt-2 text-3xl font-black tracking-tight sm:text-4xl">
+                    <h3 className="mt-2 text-2xl font-black tracking-tight sm:text-4xl">
                       {project.title}
                     </h3>
                     <p className="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-base">

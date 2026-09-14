@@ -58,11 +58,11 @@ const steps = [
 
 export function ProcessSection() {
   return (
-    <section id="process" className="relative py-24 sm:py-32 overflow-hidden">
+    <section id="process" className="relative overflow-hidden py-16 sm:py-24 lg:py-32">
       {/* Background */}
       <div className="pointer-events-none absolute inset-0 dot-pattern opacity-20" />
 
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           label="How I Work"
           title="From Idea to Production"

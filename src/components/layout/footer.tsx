@@ -20,14 +20,21 @@ export function Footer() {
       <div className="pointer-events-none absolute left-0 top-0 h-64 w-64 rounded-full bg-accent-blue/3 blur-[80px]" />
       <div className="pointer-events-none absolute right-0 bottom-0 h-64 w-64 rounded-full bg-accent-purple/3 blur-[80px]" />
 
-      <div className="relative mx-auto max-w-7xl px-6 py-16 lg:px-8">
+      <div className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
         {/* Freelance status banner */}
-        <div className="mb-12 flex items-center justify-center gap-3 rounded-2xl border border-accent-emerald/20 bg-accent-emerald/5 p-5">
-          <span className="relative flex h-2.5 w-2.5">
+        <div className="mb-12 flex flex-col items-center justify-center gap-3 rounded-2xl border border-accent-emerald/20 bg-accent-emerald/5 p-4 text-center sm:flex-row sm:p-5 sm:text-left">
+          <span className="relative flex h-2.5 w-2.5 shrink-0">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-emerald opacity-60" />
             <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-accent-emerald" />
           </span>
-          <p className="text-sm font-semibold text-accent-emerald">🟢 Available for freelance projects</p>
+          <a
+            href={SITE_CONFIG.freelanceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm font-semibold text-accent-emerald transition-colors hover:underline"
+          >
+            Available for freelance projects
+          </a>
           <Link
             href="#contact"
             className="rounded-full border border-accent-emerald/40 bg-accent-emerald/10 px-3 py-1 text-xs font-bold text-accent-emerald transition-all hover:bg-accent-emerald/20"

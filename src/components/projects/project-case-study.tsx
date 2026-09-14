@@ -29,7 +29,7 @@ export function ProjectCaseStudy({ project, nextProject }: ProjectCaseStudyProps
 
   return (
     <article className="min-h-screen pt-24 pb-16">
-      <div className="mx-auto max-w-6xl px-6 lg:px-8">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <Link
           href="/#projects"
           className="mb-8 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
@@ -38,9 +38,9 @@ export function ProjectCaseStudy({ project, nextProject }: ProjectCaseStudyProps
           Back to Projects
         </Link>
 
-        <header className="rounded-3xl border border-border bg-card/80 p-8">
+        <header className="rounded-3xl border border-border bg-card/80 p-5 sm:p-8">
           <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground">{project.category.toUpperCase()}</p>
-          <h1 className="mt-2 text-4xl font-bold tracking-tight sm:text-5xl">{project.title}</h1>
+          <h1 className="mt-2 text-2xl font-bold tracking-tight sm:text-4xl lg:text-5xl">{project.title}</h1>
           <p className="mt-4 max-w-3xl text-muted-foreground">{project.longDescription}</p>
           <div className="mt-5 flex flex-wrap gap-2">
             {project.technologies.map((tech) => (

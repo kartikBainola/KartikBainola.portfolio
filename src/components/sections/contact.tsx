@@ -96,7 +96,7 @@ export function ContactSection() {
   ];
 
   return (
-    <section id="contact" className="relative py-24 sm:py-32 bg-card/30 overflow-hidden">
+    <section id="contact" className="relative overflow-hidden bg-card/30 py-16 sm:py-24 lg:py-32">
       {/* Gradient mesh background */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute left-1/4 top-0 h-[400px] w-[400px] rounded-full bg-accent-blue/8 blur-[100px]" />
@@ -104,7 +104,7 @@ export function ContactSection() {
       </div>
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px section-divider" />
 
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Big headline */}
         <FadeIn>
           <div className="mb-4 flex justify-center">
@@ -114,7 +114,7 @@ export function ContactSection() {
             </span>
           </div>
           <div className="mb-6 text-center">
-            <h2 className="text-4xl font-black tracking-tight sm:text-5xl lg:text-6xl">
+            <h2 className="text-3xl font-black tracking-tight sm:text-5xl lg:text-6xl">
               Let&apos;s{" "}
               <span className="gradient-text animate-gradient" style={{ backgroundSize: "300% 300%" }}>
                 Talk
@@ -135,13 +135,18 @@ export function ContactSection() {
               <Globe className="h-3.5 w-3.5 text-accent-purple" />
               IST (UTC +5:30) · Dehradun, India
             </div>
-            <div className="flex items-center gap-2 rounded-full border border-accent-emerald/30 bg-accent-emerald/5 px-4 py-2 text-xs text-accent-emerald">
+            <a
+              href={SITE_CONFIG.freelanceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 rounded-full border border-accent-emerald/30 bg-accent-emerald/5 px-4 py-2 text-xs text-accent-emerald transition-colors hover:border-accent-emerald/50 hover:bg-accent-emerald/10"
+            >
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-emerald opacity-60" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-accent-emerald" />
               </span>
               Available for freelance
-            </div>
+            </a>
           </div>
         </FadeIn>
 
@@ -156,17 +161,19 @@ export function ContactSection() {
                 </p>
               </div>
 
-              <CopyEmailButton email={SITE_CONFIG.email} />
+              <div className="grid grid-cols-1 gap-3 min-[480px]:grid-cols-2">
+                <CopyEmailButton email={SITE_CONFIG.email} />
 
-              <MagneticButton>
-                <Button asChild variant="outline" className="group relative overflow-hidden">
-                  <a href={withBasePath(SITE_CONFIG.resumeUrl)} download data-cursor="button">
-                    <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
-                    <Download className="h-4 w-4" />
-                    Download Resume
-                  </a>
-                </Button>
-              </MagneticButton>
+                <MagneticButton className="w-full">
+                  <Button asChild variant="outline" className="group relative h-11 w-full overflow-hidden">
+                    <a href={withBasePath(SITE_CONFIG.resumeUrl)} download data-cursor="button">
+                      <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+                      <Download className="h-4 w-4" />
+                      Download Resume
+                    </a>
+                  </Button>
+                </MagneticButton>
+              </div>
 
               {/* Contact links */}
               <div className="grid grid-cols-2 gap-3">
@@ -177,9 +184,9 @@ export function ContactSection() {
                     target={link.href.startsWith("http") ? "_blank" : undefined}
                     rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
                     data-cursor-hover
-                    className={`group flex items-center gap-3 rounded-xl border bg-card/50 p-4 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg ${link.color}`}
+                    className={`group flex min-w-0 items-center gap-3 rounded-xl border bg-card/50 p-3 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg sm:p-4 ${link.color}`}
                   >
-                    <link.icon className="h-5 w-5 transition-transform group-hover:scale-110" />
+                    <link.icon className="h-5 w-5 shrink-0 transition-transform group-hover:scale-110" />
                     <span className="text-sm font-semibold">{link.label}</span>
                   </a>
                 ))}
@@ -189,7 +196,7 @@ export function ContactSection() {
 
           {/* ── Right: form ─────────────────────────── */}
           <FadeIn direction="right">
-            <div className="relative overflow-hidden rounded-2xl border border-border bg-card p-8">
+            <div className="relative overflow-hidden rounded-2xl border border-border bg-card p-5 sm:p-8">
               {/* Top gradient line */}
               <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-accent-blue via-accent-purple to-accent-cyan" />
 

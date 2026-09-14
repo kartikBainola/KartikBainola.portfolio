@@ -55,13 +55,13 @@ export function SkillsSection() {
       : skills.filter((s) => s.category === activeCategory);
 
   return (
-    <section id="skills" className="relative py-24 sm:py-32">
+    <section id="skills" className="relative overflow-hidden py-16 sm:py-24 lg:py-32">
       {/* Radial glow */}
       <div className="pointer-events-none absolute inset-x-0 top-0 flex justify-center">
         <div className="h-96 w-[800px] rounded-full bg-accent-purple/5 blur-[120px]" />
       </div>
 
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           label="Skills"
           title="Technical Expertise"
@@ -75,7 +75,7 @@ export function SkillsSection() {
               onClick={() => setActiveCategory("All")}
               data-cursor-hover
               className={cn(
-                "rounded-full border px-4 py-2 text-sm font-medium transition-all cursor-pointer",
+                "rounded-full border px-3 py-1.5 text-xs font-medium transition-all cursor-pointer sm:px-4 sm:py-2 sm:text-sm",
                 activeCategory === "All"
                   ? "border-accent-blue bg-accent-blue/10 text-accent-blue shadow-[0_0_16px_rgba(59,130,246,0.15)]"
                   : "border-border text-muted-foreground hover:border-accent-blue/30 hover:text-foreground"
@@ -91,7 +91,7 @@ export function SkillsSection() {
                   onClick={() => setActiveCategory(cat)}
                   data-cursor-hover
                   className={cn(
-                    "flex items-center gap-1.5 rounded-full border px-4 py-2 text-sm font-medium transition-all cursor-pointer",
+                    "flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium transition-all cursor-pointer sm:px-4 sm:py-2 sm:text-sm",
                     activeCategory === cat
                       ? `${color.border} ${color.bg} ${color.text} shadow-sm`
                       : "border-border text-muted-foreground hover:border-accent-blue/30 hover:text-foreground"
@@ -134,7 +134,7 @@ export function SkillsSection() {
                               key={skill.name}
                               whileHover={{ y: -5, scale: 1.04 }}
                               className={cn(
-                                "group glass-card relative flex flex-col items-center gap-2.5 rounded-2xl p-5 transition-all duration-300 hover:glow-blue-sm cursor-default gradient-border-hover"
+                                "group glass-card relative flex flex-col items-center gap-2 rounded-2xl p-3 transition-all duration-300 hover:glow-blue-sm cursor-default gradient-border-hover sm:p-5"
                               )}
                             >
                               <div className={cn("flex h-11 w-11 items-center justify-center rounded-xl transition-all", color.bg, "group-hover:scale-110")}>
@@ -168,7 +168,7 @@ export function SkillsSection() {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: index * 0.04 }}
                     whileHover={{ y: -5, scale: 1.04 }}
-                    className="group glass-card relative flex flex-col items-center gap-2.5 rounded-2xl p-5 transition-all duration-300 hover:glow-blue-sm cursor-default gradient-border-hover"
+                    className="group glass-card relative flex flex-col items-center gap-2 rounded-2xl p-3 transition-all duration-300 hover:glow-blue-sm cursor-default gradient-border-hover sm:p-5"
                   >
                     <div className={cn("flex h-11 w-11 items-center justify-center rounded-xl transition-all", color.bg, "group-hover:scale-110")}>
                       <Icon className={cn("h-5 w-5", color.text)} />

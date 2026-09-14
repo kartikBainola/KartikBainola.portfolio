@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   Smartphone, Palette, Globe, Flame, Network, Wrench, Gauge, Upload,
@@ -42,13 +41,13 @@ const serviceGradients: Record<string, string> = {
 
 export function ServicesSection() {
   return (
-    <section id="services" className="relative py-24 sm:py-32 bg-card/30 overflow-hidden">
+    <section id="services" className="relative overflow-hidden bg-card/30 py-16 sm:py-24 lg:py-32">
       {/* Centered radial glow */}
       <div className="pointer-events-none absolute inset-x-0 top-1/2 flex -translate-y-1/2 justify-center">
         <div className="h-[500px] w-[700px] rounded-full bg-accent-purple/5 blur-[120px]" />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           label="Services"
           title="What I Can Build For You"
@@ -107,10 +106,15 @@ export function ServicesSection() {
             <p className="text-sm text-muted-foreground">Ready to build something great?</p>
             <MagneticButton>
               <Button asChild size="lg" variant="gradient" className="group relative overflow-hidden">
-                <Link href={SITE_CONFIG.freelanceUrl} data-cursor-hover>
+                <a
+                  href={SITE_CONFIG.freelanceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-cursor-hover
+                >
                   <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/15 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
                   View Development Services
-                </Link>
+                </a>
               </Button>
             </MagneticButton>
           </div>

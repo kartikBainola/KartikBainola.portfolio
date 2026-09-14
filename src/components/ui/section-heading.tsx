@@ -32,7 +32,7 @@ export function SectionHeading({
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
       className={cn(
-        "mb-16 max-w-3xl",
+        "mb-10 max-w-3xl sm:mb-16",
         align === "center" && "mx-auto text-center",
         className
       )}
@@ -52,7 +52,7 @@ export function SectionHeading({
         </motion.span>
       )}
 
-      <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+      <h2 className="text-2xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
         {titleGradient ? (
           <span className="gradient-text">{title}</span>
         ) : (

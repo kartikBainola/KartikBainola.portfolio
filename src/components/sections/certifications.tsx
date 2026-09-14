@@ -8,8 +8,8 @@ import { certifications } from "@/data/certifications";
 
 export function CertificationsSection() {
   return (
-    <section id="certifications" className="relative py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section id="certifications" className="relative overflow-hidden py-16 sm:py-24 lg:py-32">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           label="Certifications"
           title="Professional Credentials"

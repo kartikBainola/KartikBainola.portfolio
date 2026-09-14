@@ -24,11 +24,11 @@ export function ExperienceSection() {
   const activeColor = companyColors[active.company] ?? defaultColor;
 
   return (
-    <section id="experience" className="relative py-24 sm:py-32 bg-card/30">
+    <section id="experience" className="relative overflow-hidden bg-card/30 py-16 sm:py-24 lg:py-32">
       {/* Background glow */}
       <div className="pointer-events-none absolute right-0 top-1/2 h-96 w-96 -translate-y-1/2 rounded-full bg-accent-purple/5 blur-[100px]" />
 
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           label="Experience"
           title="Professional Journey"
@@ -38,7 +38,7 @@ export function ExperienceSection() {
         <div className="grid gap-8 lg:grid-cols-[300px_1fr]">
           {/* ── Tab list ───────────────────────────── */}
           <FadeIn direction="left">
-            <div className="relative flex flex-row gap-2 overflow-x-auto pb-2 lg:flex-col lg:overflow-visible">
+            <div className="no-scrollbar relative -mx-4 flex flex-row gap-2 overflow-x-auto px-4 pb-2 snap-x snap-mandatory sm:mx-0 sm:px-0 lg:flex-col lg:overflow-visible lg:snap-none">
               <div className="absolute left-[18px] top-0 hidden h-full w-px bg-border lg:block" />
               <motion.div
                 className="absolute left-[18px] hidden w-px bg-gradient-to-b from-accent-blue via-accent-purple to-accent-cyan lg:block"
@@ -58,7 +58,7 @@ export function ExperienceSection() {
                     onClick={() => setActiveId(exp.id)}
                     data-cursor-hover
                     className={cn(
-                      "relative shrink-0 rounded-xl border px-4 py-4 text-left transition-all cursor-pointer lg:ml-8",
+                      "relative min-w-[11.5rem] shrink-0 snap-start rounded-xl border px-4 py-4 text-left transition-all cursor-pointer lg:ml-8 lg:min-w-0",
                       isActive
                         ? "border-accent-blue/50 bg-muted glow-blue"
                         : "border-border bg-card hover:border-accent-blue/30"
@@ -96,7 +96,7 @@ export function ExperienceSection() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3 }}
-                className="relative overflow-hidden rounded-2xl border border-border bg-card p-8"
+                className="relative overflow-hidden rounded-2xl border border-border bg-card p-5 sm:p-8"
               >
                 {/* Top gradient accent */}
                 <div className={`pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r ${activeColor}`} />
@@ -107,7 +107,7 @@ export function ExperienceSection() {
                       {active.company.charAt(0)}
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold">{active.role}</h3>
+                      <h3 className="text-lg font-bold sm:text-xl">{active.role}</h3>
                       <p className="mt-0.5 text-base font-semibold text-accent-blue">{active.company}</p>
                     </div>
                   </div>

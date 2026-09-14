@@ -23,15 +23,15 @@ export function CopyEmailButton({ email, className }: CopyEmailButtonProps) {
       onClick={handleCopy}
       data-cursor-hover
       className={cn(
-        "inline-flex items-center gap-2 rounded-lg border border-border bg-muted/50 px-4 py-2 text-sm transition-all hover:border-accent-blue/50 hover:bg-muted",
+        "inline-flex h-11 min-w-0 w-full items-center justify-center gap-2 rounded-lg border border-border bg-muted/50 px-3 text-sm transition-all hover:border-accent-blue/50 hover:bg-muted sm:px-4",
         className
       )}
     >
-      <span>{email}</span>
+      <span className="truncate">{email}</span>
       {copied ? (
-        <Check className="h-4 w-4 text-accent-cyan" />
+        <Check className="h-4 w-4 shrink-0 text-accent-cyan" />
       ) : (
-        <Copy className="h-4 w-4 text-muted-foreground" />
+        <Copy className="h-4 w-4 shrink-0 text-muted-foreground" />
       )}
     </button>
   );

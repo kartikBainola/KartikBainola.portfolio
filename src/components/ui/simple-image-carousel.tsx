@@ -108,6 +108,16 @@ export const SimpleImageCarousel = React.forwardRef<
     Math.floor(items.length / 2)
   );
 
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    const mq = window.matchMedia("(max-width: 640px)");
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
   const handleNext = React.useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % items.length);
   }, [items.length]);
@@ -132,7 +142,7 @@ export const SimpleImageCarousel = React.forwardRef<
     >
       {/* Carousel stage */}
       <div
-        className="relative w-full h-[260px] sm:h-[320px] md:h-[460px] flex items-center justify-center overflow-hidden"
+        className="relative w-full h-[220px] sm:h-[320px] md:h-[460px] flex items-center justify-center overflow-hidden"
         style={{ perspective: "1000px" }}
       >
         {items.map((item, index) => {
@@ -145,17 +155,17 @@ export const SimpleImageCarousel = React.forwardRef<
           const isAdjacent = Math.abs(pos) === 1;
           const isVisible = Math.abs(pos) <= 1;
 
-          const translateX = pos * 115;
+          const translateX = pos * (isMobile ? 0 : 115);
           const scale = isCenter ? 1 : isAdjacent ? 0.82 : 0.65;
-          const rotateY = pos * -12;
-          const opacity = isCenter ? 1 : isAdjacent ? 0.45 : 0;
+          const rotateY = isMobile ? 0 : pos * -12;
+          const opacity = isCenter ? 1 : isMobile ? 0 : isAdjacent ? 0.45 : 0;
           const blurPx = isCenter ? 0 : 5;
 
           return (
             <div
               key={index}
               aria-hidden={!isCenter}
-              className="absolute w-32 h-[240px] sm:w-40 sm:h-[300px] md:w-60 md:h-[430px] rounded-3xl overflow-hidden border border-white/10 shadow-2xl transition-all duration-500 ease-in-out"
+              className="absolute w-[9.5rem] h-[210px] sm:w-40 sm:h-[300px] md:w-60 md:h-[430px] rounded-3xl overflow-hidden border border-white/10 shadow-2xl transition-all duration-500 ease-in-out"
               style={{
                 transform: `translateX(${translateX}%) scale(${scale}) rotateY(${rotateY}deg)`,
                 zIndex: isCenter ? 10 : isAdjacent ? 5 : 1,

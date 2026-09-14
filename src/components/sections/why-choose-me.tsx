@@ -33,14 +33,14 @@ const cardGlows = [
 
 export function WhyChooseMeSection() {
   return (
-    <section id="why-me" className="relative py-24 sm:py-32 overflow-hidden">
+    <section id="why-me" className="relative overflow-hidden py-16 sm:py-24 lg:py-32">
       {/* Background */}
       <div className="pointer-events-none absolute inset-x-0 top-0 flex justify-center">
         <div className="h-80 w-[900px] rounded-full bg-accent-blue/4 blur-[120px]" />
       </div>
       <div className="pointer-events-none absolute inset-0 grid-pattern opacity-30" />
 
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           label="Why Choose Me"
           title="The Difference I Bring"
@@ -56,7 +56,7 @@ export function WhyChooseMeSection() {
               <FadeIn key={item.title} delay={index * 0.07}>
                 <motion.div
                   whileHover={{ y: -6, scale: 1.01 }}
-                  className="group relative overflow-hidden rounded-2xl border border-border bg-card p-8 transition-all duration-400 gradient-border-hover"
+                  className="group relative overflow-hidden rounded-2xl border border-border bg-card p-5 transition-all duration-400 gradient-border-hover sm:p-8"
                 >
                   {/* Radial glow on hover */}
                   <div

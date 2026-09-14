@@ -5,13 +5,10 @@ import { useEffect, useState } from "react";
 import {
   ArrowRight,
   Download,
-  MapPin,
-  Circle,
   Code2,
   Users,
   Mail,
 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { MagneticButton } from "@/components/animations/magnetic-button";
 import { FadeIn } from "@/components/animations/fade-in";
@@ -62,7 +59,7 @@ function TypewriterRole() {
 
 export function HeroSection() {
   return (
-    <section id="hero" className="relative min-h-screen overflow-hidden pt-24">
+    <section id="hero" className="relative min-h-0 overflow-hidden pt-20 sm:min-h-screen sm:pt-24">
       <AmbientBackground />
 
       {/* Extra decorative glow orbs */}
@@ -71,33 +68,38 @@ export function HeroSection() {
         <div className="absolute right-0 bottom-0 h-[400px] w-[400px] rounded-full bg-accent-purple/8 blur-[100px]" />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="flex min-h-[calc(100vh-6rem)] flex-col items-center justify-center gap-14 lg:flex-row lg:gap-10">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col items-center justify-center gap-10 py-8 sm:min-h-[calc(100vh-6rem)] sm:gap-14 sm:py-0 lg:flex-row lg:gap-10">
           {/* ── Left content ──────────────────────────────────── */}
-          <div className="flex-1 text-center lg:text-left">
+          <div className="w-full min-w-0 flex-1 text-center lg:text-left">
             {/* Availability badge */}
             <FadeIn delay={0.1}>
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-accent-emerald/30 bg-accent-emerald/5 px-4 py-2 text-sm backdrop-blur-md">
-                <span className="relative flex h-2.5 w-2.5">
+              <a
+                href={SITE_CONFIG.freelanceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mb-6 inline-flex max-w-full flex-wrap items-center justify-center gap-x-2 gap-y-1 rounded-full border border-accent-emerald/30 bg-accent-emerald/5 px-3 py-2 text-sm backdrop-blur-md transition-colors hover:border-accent-emerald/50 hover:bg-accent-emerald/10 sm:px-4 lg:justify-start"
+              >
+                <span className="relative flex h-2.5 w-2.5 shrink-0">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-emerald opacity-60" />
                   <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-accent-emerald" />
                 </span>
-                <span className="font-semibold text-accent-emerald">🟢 Available for freelance projects</span>
-                <span className="text-muted-foreground/40">·</span>
-                <span className="text-muted-foreground text-xs">Replies within 24 hours</span>
-              </div>
+                <span className="font-semibold text-accent-emerald">Available for freelance projects</span>
+                <span className="hidden text-muted-foreground/40 sm:inline">·</span>
+                <span className="hidden text-muted-foreground text-xs sm:inline">Replies within 24 hours</span>
+              </a>
             </FadeIn>
 
             {/* Eyebrow */}
             <FadeIn delay={0.2}>
-              <p className="mb-3 text-sm font-semibold tracking-[0.3em] text-muted-foreground uppercase">
+              <p className="mb-3 text-[11px] font-semibold tracking-[0.12em] text-muted-foreground uppercase sm:text-sm sm:tracking-[0.3em]">
                 FLUTTER ENGINEER & MOBILE APP DEVELOPER
               </p>
             </FadeIn>
 
             {/* Name */}
             <FadeIn delay={0.3}>
-              <h1 className="text-5xl font-black tracking-tight sm:text-6xl xl:text-7xl leading-none">
+              <h1 className="text-4xl font-black tracking-tight leading-[1.1] break-words sm:text-6xl sm:leading-none xl:text-7xl">
                 <span className="gradient-text animate-gradient" style={{ backgroundSize: "300% 300%" }}>
                   {profile.name.toUpperCase()}
                 </span>
@@ -107,10 +109,10 @@ export function HeroSection() {
             {/* Typewriter role */}
             <FadeIn delay={0.4}>
               <div className="mt-5 max-w-2xl space-y-2">
-                <p className="text-2xl font-semibold sm:text-3xl leading-tight">
+                <p className="text-xl font-semibold leading-tight sm:text-3xl">
                   <TypewriterRole />
                 </p>
-                <p className="text-base text-muted-foreground sm:text-lg">
+                <p className="text-sm text-muted-foreground sm:text-lg">
                   Flutter • Android • iOS • Firebase • REST APIs • AI/OCR
                 </p>
               </div>
@@ -125,9 +127,9 @@ export function HeroSection() {
 
             {/* CTA Buttons */}
             <FadeIn delay={0.6}>
-              <div className="mt-8 flex flex-wrap items-center justify-center gap-4 lg:justify-start">
-                <MagneticButton>
-                  <Button asChild size="lg" variant="gradient" className="group relative overflow-hidden">
+              <div className="mt-8 flex w-full flex-col items-stretch justify-center gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:gap-4 lg:justify-start">
+                <MagneticButton className="w-full sm:w-auto">
+                  <Button asChild size="lg" variant="gradient" className="group relative w-full overflow-hidden sm:w-auto">
                     <Link href="#projects" data-cursor="button">
                       {/* shine sweep */}
                       <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
@@ -136,8 +138,8 @@ export function HeroSection() {
                     </Link>
                   </Button>
                 </MagneticButton>
-                <MagneticButton>
-                  <Button asChild size="lg" variant="secondary" className="group relative overflow-hidden">
+                <MagneticButton className="w-full sm:w-auto">
+                  <Button asChild size="lg" variant="secondary" className="group relative w-full overflow-hidden sm:w-auto">
                     <a href={withBasePath(SITE_CONFIG.resumeUrl)} download data-cursor="button">
                       <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
                       <Download className="h-4 w-4" />
@@ -150,7 +152,7 @@ export function HeroSection() {
 
             {/* Social links — pill style */}
             <FadeIn delay={0.7}>
-              <div className="mt-7 flex items-center justify-center gap-3 lg:justify-start">
+              <div className="mt-7 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
                 {[
                   { href: SOCIAL_LINKS.github, icon: Code2, label: "GitHub" },
                   { href: SOCIAL_LINKS.linkedin, icon: Users, label: "LinkedIn" },
@@ -174,8 +176,8 @@ export function HeroSection() {
           </div>
 
           {/* ── Right — Carousel ──────────────────────────────── */}
-          <div className="relative flex w-full flex-1 items-center justify-center pb-4 lg:pb-8">
-            <div className="relative w-full max-w-[34rem] lg:max-w-[40rem]">
+          <div className="relative flex w-full min-w-0 flex-1 items-center justify-center pb-4 lg:pb-8">
+            <div className="relative w-full max-w-[20rem] sm:max-w-[34rem] lg:max-w-[40rem]">
               <SimpleImageCarousel
                 items={heroApps.map((app) => ({
                   video: app.video,

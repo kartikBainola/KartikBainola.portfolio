@@ -33,11 +33,11 @@ const timelineIcons = [GraduationCap, Code2, Building2, Rocket];
 
 export function AboutSection() {
   return (
-    <section id="about" className="relative py-24 sm:py-32">
+    <section id="about" className="relative overflow-hidden py-16 sm:py-24 lg:py-32">
       {/* radial glow */}
       <div className="pointer-events-none absolute left-0 top-1/2 h-96 w-96 -translate-y-1/2 rounded-full bg-accent-blue/5 blur-[100px]" />
 
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           label="About Me"
           title="I Build Products, Not Just Interfaces"
@@ -65,7 +65,7 @@ export function AboutSection() {
                 </div>
               </div>
 
-              <h3 className="text-3xl font-bold tracking-tight sm:text-4xl leading-tight">
+              <h3 className="text-2xl font-bold tracking-tight leading-tight sm:text-4xl">
                 I build <span className="gradient-text">products</span>,<br />
                 not just interfaces.
               </h3>
@@ -112,7 +112,7 @@ export function AboutSection() {
           <FadeIn direction="right">
             <div className="space-y-6">
               {/* Journey timeline */}
-              <div className="rounded-3xl border border-border bg-card/70 p-6 backdrop-blur-md">
+              <div className="rounded-3xl border border-border bg-card/70 p-4 backdrop-blur-md sm:p-6">
                 <p className="mb-6 text-xs font-bold tracking-[0.2em] text-muted-foreground uppercase">
                   Journey
                 </p>
@@ -152,7 +152,7 @@ export function AboutSection() {
               </div>
 
               {/* Delivery Pipeline */}
-              <div className="rounded-3xl border border-border bg-card/70 p-6 backdrop-blur-md">
+              <div className="rounded-3xl border border-border bg-card/70 p-4 backdrop-blur-md sm:p-6">
                 <p className="mb-5 text-xs font-bold tracking-[0.2em] text-muted-foreground uppercase">
                   Delivery Pipeline
                 </p>

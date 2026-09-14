@@ -7,8 +7,8 @@ import { education } from "@/data/education";
 
 export function EducationSection() {
   return (
-    <section id="education" className="relative py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section id="education" className="relative overflow-hidden py-16 sm:py-24 lg:py-32">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           label="Education"
           title="Academic Background"
@@ -18,14 +18,14 @@ export function EducationSection() {
         <div className="grid gap-6">
           {education.map((item, index) => (
             <FadeIn key={item.id} delay={index * 0.1}>
-              <div className="rounded-2xl border border-border bg-card p-8 transition-all hover:border-accent-blue/30">
+              <div className="rounded-2xl border border-border bg-card p-5 transition-all hover:border-accent-blue/30 sm:p-8">
                 <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
                   <div className="flex gap-4">
                     <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-accent-blue/20 to-accent-purple/20">
                       <GraduationCap className="h-6 w-6 text-accent-blue" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold">{item.degree}</h3>
+                      <h3 className="text-lg font-bold sm:text-xl">{item.degree}</h3>
                       <p className="mt-1 text-accent-blue">{item.institution}</p>
                       <p className="mt-1 text-sm text-muted-foreground">
                         {item.period}

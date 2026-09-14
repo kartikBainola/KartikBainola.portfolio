@@ -15,14 +15,14 @@ const fixedStats = [
 
 export function ImpactSection() {
   return (
-    <section id="impact" className="relative overflow-hidden py-16 sm:py-20">
+    <section id="impact" className="relative overflow-hidden py-12 sm:py-16 lg:py-20">
       {/* Background gradient band */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-accent-blue/5 via-accent-purple/5 to-accent-cyan/5" />
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px section-divider" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px section-divider" />
       <div className="pointer-events-none absolute inset-0 dot-pattern opacity-30" />
 
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Label */}
         <FadeIn>
           <div className="mb-10 text-center">

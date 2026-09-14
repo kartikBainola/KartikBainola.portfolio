@@ -7,7 +7,7 @@ export const SITE_CONFIG = {
   email: "kartikbainola1303@gmail.com",
   phone: "+91 76689 34850",
   location: "Dehradun, Uttarakhand, India",
-  freelanceUrl: "#services",
+  freelanceUrl: "https://nexivosupertech.netlify.app/",
   resumeUrl: "/KartikBainola_2026_resume.pdf",
   ogImage: "/og-image.png",
 } as const;

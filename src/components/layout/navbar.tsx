@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sun, Moon, Laptop } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/components/providers/theme-provider";
-import { NAV_LINKS } from "@/lib/constants";
+import { NAV_LINKS, SITE_CONFIG } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
@@ -45,19 +45,19 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 pt-[env(safe-area-inset-top)]",
         isScrolled
           ? "glass border-b border-border/50 py-3"
           : "bg-transparent py-5"
       )}
     >
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-8">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
-        <Link href="/" className="group flex items-center gap-2.5" data-cursor-hover>
-            <div className="relative h-8 w-8 rounded-lg overflow-hidden">
+        <Link href="/" className="group flex min-w-0 items-center gap-2.5" data-cursor-hover>
+            <div className="relative h-8 w-8 shrink-0 rounded-lg overflow-hidden">
             <Image src="kb-mark.png" alt="KB" fill className="object-contain" />
           </div>
-          <span className="text-base font-bold tracking-tight">Kartik Bainola</span>
+          <span className="hidden truncate text-sm font-bold tracking-tight min-[380px]:inline sm:text-base">Kartik Bainola</span>
         </Link>
 
         {/* Desktop nav */}
@@ -87,7 +87,7 @@ export function Navbar() {
         </div>
 
         {/* Right controls */}
-        <div className="flex items-center gap-2">
+        <div className="flex shrink-0 items-center gap-1 sm:gap-2">
           <Button
             variant="ghost"
             size="icon"
@@ -104,14 +104,16 @@ export function Navbar() {
           </Button>
 
           {/* Gradient Hire Me button */}
-          <Link
-            href="#contact"
+          <a
+            href={SITE_CONFIG.freelanceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             data-cursor-hover
-            className="hidden sm:inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-accent-blue to-accent-purple px-4 py-2 text-sm font-bold text-white shadow-[0_0_20px_rgba(59,130,246,0.25)] transition-all duration-300 hover:shadow-[0_0_30px_rgba(59,130,246,0.4)] hover:scale-[1.02] relative overflow-hidden group"
+            className="inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-accent-blue to-accent-purple px-3 py-1.5 text-xs font-bold text-white shadow-[0_0_20px_rgba(59,130,246,0.25)] transition-all duration-300 hover:shadow-[0_0_30px_rgba(59,130,246,0.4)] hover:scale-[1.02] relative overflow-hidden group sm:px-4 sm:py-2 sm:text-sm"
           >
             <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/15 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
             Hire Me
-          </Link>
+          </a>
 
           <Button
             variant="ghost"
@@ -134,7 +136,7 @@ export function Navbar() {
             exit={{ opacity: 0, height: 0 }}
             className="glass border-b border-border/50 md:hidden"
           >
-            <div className="flex flex-col gap-1 px-6 py-4">
+            <div className="flex flex-col gap-1 px-4 py-4 sm:px-6">
               {NAV_LINKS.map((link) => (
                 <Link
                   key={link.href}
@@ -145,13 +147,15 @@ export function Navbar() {
                   {link.label}
                 </Link>
               ))}
-              <Link
-                href="#contact"
+              <a
+                href={SITE_CONFIG.freelanceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={() => setIsMobileOpen(false)}
                 className="mt-2 flex items-center justify-center gap-1.5 rounded-lg bg-gradient-to-r from-accent-blue to-accent-purple px-4 py-2.5 text-sm font-bold text-white"
               >
                 Hire Me
-              </Link>
+              </a>
             </div>
           </motion.div>
         )}
