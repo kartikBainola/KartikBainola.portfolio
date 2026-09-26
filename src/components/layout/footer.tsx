@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Code2, Users, Mail, Phone, Heart } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { NAV_LINKS, SITE_CONFIG, SOCIAL_LINKS } from "@/lib/constants";
+import { withBasePath } from "@/lib/utils";
 
 const socialLinks = [
   { href: SOCIAL_LINKS.linkedin, icon: Users, label: "LinkedIn", hoverColor: "hover:border-blue-400/50 hover:text-blue-400 hover:shadow-[0_0_16px_rgba(59,130,246,0.2)]" },
@@ -48,7 +49,7 @@ export function Footer() {
           <div>
             <Link href="/" className="flex items-center gap-2.5 group">
             <div className="relative h-9 w-9 rounded-lg overflow-hidden">
-                <img src="kb-mark.png" alt="KB" className="h-full w-full object-contain" />
+                <img src={withBasePath("/kb-mark.png")} alt="KB" className="h-full w-full object-contain" />
               </div>
               <span className="text-base font-bold">{SITE_CONFIG.name}</span>
             </Link>
@@ -97,7 +98,7 @@ export function Footer() {
               ))}
             </div>
 
-            <p className="mt-5 text-xs text-muted-foreground">
+            <p className="mt-5 break-all text-xs text-muted-foreground">
               {SITE_CONFIG.email}
             </p>
           </div>

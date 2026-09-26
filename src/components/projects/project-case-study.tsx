@@ -5,6 +5,7 @@ import type { Project } from "@/types";
 import { ArchitectureDiagram } from "@/components/projects/architecture-diagram";
 import { ProjectVisual } from "@/components/ui/project-visual";
 import { getProjectLogo, getProjectScreenshots } from "@/lib/project-media";
+import { withBasePath } from "@/lib/utils";
 
 interface ProjectCaseStudyProps {
   project: Project;
@@ -80,7 +81,7 @@ export function ProjectCaseStudy({ project, nextProject }: ProjectCaseStudyProps
                   data-cursor="image"
                 >
                   <Image
-                    src={image}
+                    src={withBasePath(image)}
                     alt={`${project.title} screenshot ${index + 1}`}
                     fill
                     unoptimized

@@ -70,7 +70,7 @@ export function SkillsSection() {
 
         {/* Category filters */}
         <FadeIn>
-          <div className="mb-10 flex flex-wrap justify-center gap-2">
+          <div className="mb-8 flex flex-wrap justify-center gap-2">
             <button
               onClick={() => setActiveCategory("All")}
               data-cursor-hover
@@ -113,20 +113,20 @@ export function SkillsSection() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="space-y-10"
+              className="space-y-6"
             >
               {groupedSkills.map((group, groupIndex) => {
                 const color = categoryColors[group.category] ?? defaultColor;
                 return (
                   <FadeIn key={group.category} delay={groupIndex * 0.04}>
                     <div>
-                      <div className="mb-4 flex items-center gap-2">
+                      <div className="mb-3 flex items-center gap-2">
                         <span className={cn("h-1.5 w-6 rounded-full bg-gradient-to-r", color.text.replace("text-", "from-"), "to-transparent")} />
-                        <h3 className={cn("text-xs font-bold tracking-[0.2em]", color.text)}>
-                          {group.category.toUpperCase()}
+                        <h3 className={cn("text-xs font-bold tracking-[0.14em]", color.text)}>
+                          {group.category}
                         </h3>
                       </div>
-                      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+                      <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
                         {group.items.map((skill) => {
                           const Icon = iconComponents[skill.icon] || Code;
                           return (
@@ -134,10 +134,10 @@ export function SkillsSection() {
                               key={skill.name}
                               whileHover={{ y: -5, scale: 1.04 }}
                               className={cn(
-                                "group glass-card relative flex flex-col items-center gap-2 rounded-2xl p-3 transition-all duration-300 hover:glow-blue-sm cursor-default gradient-border-hover sm:p-5"
+                                "group glass-card relative flex flex-col items-center gap-2 rounded-xl p-2.5 transition-all duration-300 hover:glow-blue-sm cursor-default gradient-border-hover sm:p-4"
                               )}
                             >
-                              <div className={cn("flex h-11 w-11 items-center justify-center rounded-xl transition-all", color.bg, "group-hover:scale-110")}>
+                              <div className={cn("flex h-10 w-10 items-center justify-center rounded-lg transition-all", color.bg, "group-hover:scale-110")}>
                                 <Icon className={cn("h-5 w-5 transition-colors", color.text)} />
                               </div>
                               <span className="text-center text-xs font-semibold leading-tight">{skill.name}</span>
@@ -156,7 +156,7 @@ export function SkillsSection() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
-              className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6"
+              className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6"
             >
               {filtered.map((skill, index) => {
                 const Icon = iconComponents[skill.icon] || Code;
@@ -168,9 +168,9 @@ export function SkillsSection() {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: index * 0.04 }}
                     whileHover={{ y: -5, scale: 1.04 }}
-                    className="group glass-card relative flex flex-col items-center gap-2 rounded-2xl p-3 transition-all duration-300 hover:glow-blue-sm cursor-default gradient-border-hover sm:p-5"
+                    className="group glass-card relative flex flex-col items-center gap-2 rounded-xl p-2.5 transition-all duration-300 hover:glow-blue-sm cursor-default gradient-border-hover sm:p-4"
                   >
-                    <div className={cn("flex h-11 w-11 items-center justify-center rounded-xl transition-all", color.bg, "group-hover:scale-110")}>
+                    <div className={cn("flex h-10 w-10 items-center justify-center rounded-lg transition-all", color.bg, "group-hover:scale-110")}>
                       <Icon className={cn("h-5 w-5", color.text)} />
                     </div>
                     <span className="text-center text-xs font-semibold leading-tight">{skill.name}</span>
@@ -182,21 +182,21 @@ export function SkillsSection() {
         </AnimatePresence>
 
         {/* Marquee strip */}
-        <div className="mt-16 overflow-hidden">
+        <div className="mt-10 overflow-hidden">
           <div className="mb-3 flex items-center gap-3">
             <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
-            <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-muted-foreground/60">All Technologies</span>
+            <span className="text-xs font-bold tracking-[0.14em] text-muted-foreground/60">All technologies</span>
             <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
           </div>
-          <div className="flex gap-3">
-            <div className="flex animate-marquee gap-3">
+          <div className="flex justify-center gap-2">
+            <div className="flex animate-marquee gap-2">
               {marqueeSkills.map((skill, i) => {
                 const Icon = iconComponents[skill.icon] || Code;
                 const color = categoryColors[skill.category] ?? defaultColor;
                 return (
                   <div
                     key={`${skill.name}-${i}`}
-                    className={cn("flex shrink-0 items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-medium", color.border, color.bg, color.text)}
+                    className={cn("flex shrink-0 items-center gap-2 rounded-lg border px-2.5 py-1.5 text-xs font-medium", color.border, color.bg, color.text)}
                   >
                     <Icon className="h-3 w-3" />
                     {skill.name}

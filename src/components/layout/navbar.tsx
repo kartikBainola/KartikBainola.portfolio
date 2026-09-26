@@ -8,12 +8,12 @@ import { Menu, X, Sun, Moon, Laptop } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/components/providers/theme-provider";
 import { NAV_LINKS, SITE_CONFIG } from "@/lib/constants";
-import { cn } from "@/lib/utils";
+import { cn, withBasePath } from "@/lib/utils";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
+  const [activeSection, setActiveSection] = useState("about");
   const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
@@ -51,11 +51,11 @@ export function Navbar() {
           : "bg-transparent py-5"
       )}
     >
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between gap-2 px-3 sm:px-6 lg:px-8">
         {/* Logo */}
         <Link href="/" className="group flex min-w-0 items-center gap-2.5" data-cursor-hover>
             <div className="relative h-8 w-8 shrink-0 rounded-lg overflow-hidden">
-            <Image src="kb-mark.png" alt="KB" fill className="object-contain" />
+            <Image src={withBasePath("/kb-mark.png")} alt="KB" fill className="object-contain" />
           </div>
           <span className="hidden truncate text-sm font-bold tracking-tight min-[380px]:inline sm:text-base">Kartik Bainola</span>
         </Link>
@@ -103,16 +103,25 @@ export function Navbar() {
             )}
           </Button>
 
-          {/* Gradient Hire Me button */}
+          {/* Hire Me opens the contact form */}
+          <a
+            href="#contact"
+            data-cursor-hover
+            className="hidden min-[420px]:inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-accent-blue to-accent-purple px-3 py-1.5 text-xs font-bold text-white shadow-[0_0_20px_rgba(59,130,246,0.25)] transition-all duration-300 hover:shadow-[0_0_30px_rgba(59,130,246,0.4)] hover:scale-[1.02] relative overflow-hidden group sm:px-4 sm:py-2 sm:text-sm"
+          >
+            <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/15 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+            Hire Me
+          </a>
+
+          {/* Freelance services open Nexivo */}
           <a
             href={SITE_CONFIG.freelanceUrl}
             target="_blank"
             rel="noopener noreferrer"
             data-cursor-hover
-            className="inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-accent-blue to-accent-purple px-3 py-1.5 text-xs font-bold text-white shadow-[0_0_20px_rgba(59,130,246,0.25)] transition-all duration-300 hover:shadow-[0_0_30px_rgba(59,130,246,0.4)] hover:scale-[1.02] relative overflow-hidden group sm:px-4 sm:py-2 sm:text-sm"
+            className="hidden min-[420px]:inline-flex items-center rounded-lg border border-accent-emerald/40 bg-accent-emerald/10 px-2.5 py-1.5 text-[11px] font-bold text-accent-emerald transition-colors hover:border-accent-emerald/60 hover:bg-accent-emerald/20 sm:px-3 sm:py-2 sm:text-xs"
           >
-            <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/15 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
-            Hire Me
+            <span className="hidden min-[420px]:inline">Available for </span>Freelance
           </a>
 
           <Button
@@ -137,24 +146,39 @@ export function Navbar() {
             className="glass border-b border-border/50 md:hidden"
           >
             <div className="flex flex-col gap-1 px-4 py-4 sm:px-6">
-              {NAV_LINKS.map((link) => (
+              {NAV_LINKS.map((link) => {
+                const isActive = activeSection === link.href.replace("#", "");
+                return (
                 <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setIsMobileOpen(false)}
-                  className="rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                  className={cn(
+                    "rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
+                    isActive
+                      ? "bg-accent-blue/10 text-accent-blue"
+                      : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                  )}
                 >
                   {link.label}
                 </Link>
-              ))}
+                );
+              })}
+              <Link
+                href="#contact"
+                onClick={() => setIsMobileOpen(false)}
+                className="mt-2 flex items-center justify-center gap-1.5 rounded-lg bg-gradient-to-r from-accent-blue to-accent-purple px-4 py-2.5 text-sm font-bold text-white"
+              >
+                Hire Me
+              </Link>
               <a
                 href={SITE_CONFIG.freelanceUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsMobileOpen(false)}
-                className="mt-2 flex items-center justify-center gap-1.5 rounded-lg bg-gradient-to-r from-accent-blue to-accent-purple px-4 py-2.5 text-sm font-bold text-white"
+                className="flex items-center justify-center gap-1.5 rounded-lg border border-accent-emerald/40 bg-accent-emerald/10 px-4 py-2.5 text-sm font-bold text-accent-emerald"
               >
-                Hire Me
+                Available for Freelance
               </a>
             </div>
           </motion.div>

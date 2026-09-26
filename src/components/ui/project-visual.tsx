@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { cn } from "@/lib/utils";
+import { cn, withBasePath } from "@/lib/utils";
 
 interface ProjectVisualProps {
   title: string;
@@ -51,7 +51,7 @@ export function ProjectVisual({
           />
           <div className="absolute inset-0 flex items-center justify-center px-8 py-7">
             <Image
-              src={displayImage}
+              src={withBasePath(displayImage)}
               alt={`${title} logo`}
               width={180}
               height={180}
@@ -68,7 +68,7 @@ export function ProjectVisual({
       ) : displayImage ? (
         <>
           <Image
-            src={displayImage}
+            src={withBasePath(displayImage)}
             alt={`${title} preview`}
             fill
             unoptimized
@@ -101,7 +101,7 @@ export function ProjectVisual({
       <div className="absolute top-4 left-4 z-10 flex items-center gap-2.5">
         {icon && !isLogoHeader && (
           <div className="relative h-9 w-9 overflow-hidden rounded-xl shadow-lg ring-2 ring-white/20">
-            <Image src={icon} alt="" fill className="object-cover" sizes="36px" unoptimized />
+            <Image src={withBasePath(icon)} alt="" fill className="object-cover" sizes="36px" unoptimized />
           </div>
         )}
         {category && (

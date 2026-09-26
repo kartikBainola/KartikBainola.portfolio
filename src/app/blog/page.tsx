@@ -17,7 +17,7 @@ export default function BlogPage() {
 
   return (
     <div className="min-h-screen pt-24 pb-16">
-      <div className="mx-auto max-w-4xl px-6 lg:px-8">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <Link
           href="/"
           className="mb-8 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
@@ -38,7 +38,7 @@ export default function BlogPage() {
             <Link
               key={post.slug}
               href={`/blog/${post.slug}`}
-              className="group block rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent-blue/30 hover:glow-blue"
+              className="group block rounded-2xl border border-border bg-card p-4 transition-all hover:border-accent-blue/30 hover:glow-blue sm:p-6"
             >
               <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
                 <span className="flex items-center gap-1">
@@ -50,7 +50,7 @@ export default function BlogPage() {
                   {post.readingTime}
                 </span>
               </div>
-              <h2 className="mt-3 text-xl font-bold transition-colors group-hover:text-accent-blue">
+              <h2 className="mt-3 break-words text-xl font-bold transition-colors group-hover:text-accent-blue">
                 {post.title}
               </h2>
               <p className="mt-2 text-sm text-muted-foreground leading-relaxed">

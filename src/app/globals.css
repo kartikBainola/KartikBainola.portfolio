@@ -1,6 +1,11 @@
 @import "tailwindcss";
 
 :root {
+  --space-section: clamp(4rem, 8vw, 8rem);
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
   --background: #030712;
   --foreground: #ffffff;
   --card: #111827;
@@ -57,6 +62,10 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+section[id] {
+  scroll-margin-top: 5.5rem;
+}
+
 html.lenis,
 html.lenis body {
   height: auto;
@@ -72,6 +81,7 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
   overflow-x: clip;
   max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 img,
@@ -394,6 +404,37 @@ canvas {
 :focus-visible {
   outline: 2px solid var(--accent-blue);
   outline-offset: 2px;
+}
+
+/* Shared portfolio layout tokens */
+.section-padding {
+  padding-block: var(--space-section);
+}
+
+.section-label {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+/* Keep long URLs, identifiers, and generated content inside narrow layouts. */
+.prose-custom {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.prose-custom pre,
+.prose-custom table {
+  overflow-wrap: normal;
+}
+
+@media (max-width: 380px) {
+  .section-padding {
+    padding-block: clamp(3.5rem, 14vw, 5rem);
+  }
 }
 
 /* ─── Media Controls ───────────────────────────────────────────────── */

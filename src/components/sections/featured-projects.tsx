@@ -10,6 +10,7 @@ import { ProjectVisual } from "@/components/ui/project-visual";
 import { projects } from "@/data/projects";
 import { getProjectLogo, getProjectScreenshots } from "@/lib/project-media";
 import { Button } from "@/components/ui/button";
+import { withBasePath } from "@/lib/utils";
 
 export function FeaturedProjectsSection() {
   const featured = projects.filter((project) => project.featured);
@@ -50,7 +51,7 @@ export function FeaturedProjectsSection() {
 
                 <div className="grid gap-0 lg:grid-cols-[1.1fr_1fr]">
                   {/* ── Visual area ───────────────────────── */}
-                  <div className={`relative min-h-[22rem] overflow-hidden ${index % 2 === 1 ? "lg:order-2" : ""}`}>
+                  <div className={`relative min-h-[16rem] overflow-hidden sm:min-h-[22rem] ${index % 2 === 1 ? "lg:order-2" : ""}`}>
                     {(() => {
                       const screenshots = getProjectScreenshots(project).slice(0, 3);
 
@@ -62,7 +63,7 @@ export function FeaturedProjectsSection() {
                             color={project.color}
                             category={project.category}
                             variant="featured"
-                            className="h-full min-h-[22rem]"
+                            className="h-full min-h-[16rem] sm:min-h-[22rem]"
                             logoBackground={project.logoBackground}
                           />
                         );
@@ -106,7 +107,7 @@ export function FeaturedProjectsSection() {
                                   )}
                                   <div className={isPoster ? "relative aspect-[3/4]" : "relative aspect-[9/19]"}>
                                     <Image
-                                      src={screenshot}
+                                      src={withBasePath(screenshot)}
                                       alt={`${project.title} screenshot ${shotIndex + 1}`}
                                       fill
                                       unoptimized
@@ -159,14 +160,14 @@ export function FeaturedProjectsSection() {
                             href={project.playStore}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-3 py-1.5 text-xs font-bold text-emerald-400 transition-all hover:bg-emerald-500/20"
+                            className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-emerald-400/30 bg-emerald-500/10 px-4 py-2 text-xs font-bold text-emerald-400 transition-all hover:bg-emerald-500/20"
                             data-cursor="link"
                           >
                             <span className="relative flex h-2 w-2">
                               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-50" />
                               <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
                             </span>
-                            LIVE ON GOOGLE PLAY
+                            Live on Google Play
                           </a>
                         )}
                         {project.appStore && (
@@ -174,14 +175,14 @@ export function FeaturedProjectsSection() {
                             href={project.appStore}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 rounded-full border border-sky-400/30 bg-sky-500/10 px-3 py-1.5 text-xs font-bold text-sky-400 transition-all hover:bg-sky-500/20"
+                            className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-sky-400/30 bg-sky-500/10 px-4 py-2 text-xs font-bold text-sky-400 transition-all hover:bg-sky-500/20"
                             data-cursor="link"
                           >
                             <span className="relative flex h-2 w-2">
                               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-50" />
                               <span className="relative inline-flex h-2 w-2 rounded-full bg-sky-400" />
                             </span>
-                            LIVE ON APP STORE
+                            Live on App Store
                           </a>
                         )}
                       </div>

@@ -27,7 +27,7 @@ export function AmbientBackground({
       <NoiseOverlay />
       <motion.div
         className={cn(
-          "absolute -left-24 top-16 h-[26rem] w-[26rem] rounded-full blur-3xl",
+          "absolute -left-24 top-16 h-[clamp(16rem,70vw,26rem)] w-[clamp(16rem,70vw,26rem)] rounded-full blur-3xl",
           intensity === "low" ? "bg-accent-blue/10" : "bg-accent-blue/15"
         )}
         animate={
@@ -46,7 +46,7 @@ export function AmbientBackground({
       />
       <motion.div
         className={cn(
-          "absolute -right-20 bottom-4 h-[24rem] w-[24rem] rounded-full blur-3xl",
+          "absolute -right-20 bottom-4 h-[clamp(15rem,65vw,24rem)] w-[clamp(15rem,65vw,24rem)] rounded-full blur-3xl",
           intensity === "low" ? "bg-accent-purple/10" : "bg-accent-purple/15"
         )}
         animate={

@@ -1,0 +1,367 @@
+"use client";
+
+import Image from "next/image";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+  useSyncExternalStore,
+  type CSSProperties,
+  type PointerEvent,
+} from "react";
+import { withBasePath } from "@/lib/utils";
+import "./drift-wall.css";
+
+export interface DriftWallItem {
+  image: string;
+  title?: string;
+  href?: string;
+}
+
+interface DriftWallProps {
+  items: DriftWallItem[];
+  columns?: number;
+  tileWidth?: number;
+  tileHeight?: number;
+  gap?: number;
+  radius?: number;
+  tilt?: number;
+  turn?: number;
+  roll?: number;
+  perspective?: number;
+  depth?: number;
+  speed?: number;
+  direction?: "up" | "down";
+  variance?: number;
+  parallax?: number;
+  pauseOnHover?: boolean;
+  lift?: number;
+  fade?: number;
+  dim?: number;
+  grayscale?: boolean;
+  overlayColor?: string;
+  className?: string;
+  style?: CSSProperties;
+}
+
+const getReducedMotion = () =>
+  typeof window !== "undefined" &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const subscribeReducedMotion = (onChange: () => void) => {
+  if (typeof window === "undefined") return () => undefined;
+  const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+  mediaQuery.addEventListener("change", onChange);
+  return () => mediaQuery.removeEventListener("change", onChange);
+};
+
+const columnFactor = (index: number, variance: number) => {
+  const pseudo = ((index * 0.6180339887 + 0.35) % 1) * 2 - 1;
+  return 1 + variance * pseudo;
+};
+
+export function DriftWall({
+  items,
+  columns = 5,
+  tileWidth = 200,
+  tileHeight = 132,
+  gap = 18,
+  radius = 14,
+  tilt = 16,
+  turn = -14,
+  roll = 0,
+  perspective = 1200,
+  depth = 120,
+  speed = 42,
+  direction = "up",
+  variance = 0.45,
+  parallax = 0.6,
+  pauseOnHover = false,
+  lift = 64,
+  fade = 0.6,
+  dim = 0.55,
+  grayscale = false,
+  overlayColor = "#060010",
+  className = "",
+  style,
+}: DriftWallProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const planeRef = useRef<HTMLDivElement>(null);
+  const trackRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const rafRef = useRef<number | null>(null);
+  const offsetsRef = useRef<number[]>([]);
+  const velocitiesRef = useRef<number[]>([]);
+  const hoveredColRef = useRef(-1);
+  const wallHoveredRef = useRef(false);
+  const pointerRef = useRef({ x: 0, y: 0 });
+  const pointerDampedRef = useRef({ x: 0, y: 0 });
+  const lastTsRef = useRef<number | null>(null);
+  const activeIdRef = useRef<string | null>(null);
+  const [containerHeight, setContainerHeight] = useState(600);
+  const [activeId, setActiveId] = useState<string | null>(null);
+  const reduced = useSyncExternalStore(
+    subscribeReducedMotion,
+    getReducedMotion,
+    () => false
+  );
+
+  const columnItems = useMemo(() => {
+    const safeColumns = Math.max(1, Math.min(columns, items.length || 1));
+    const cols = Array.from({ length: safeColumns }, () => [] as DriftWallItem[]);
+    items.forEach((item, index) => cols[index % safeColumns].push(item));
+    return cols.map((col) => (col.length ? col : items.slice(0, 1)));
+  }, [columns, items]);
+
+  const columnMeta = useMemo(() => {
+    const unit = tileHeight + gap;
+    return columnItems.map((column) => {
+      const copyHeight = Math.max(unit, column.length * unit);
+      const copies = Math.max(2, Math.ceil((containerHeight * 1.6) / copyHeight) + 1);
+      return { copyHeight, copies };
+    });
+  }, [columnItems, containerHeight, gap, tileHeight]);
+
+  useLayoutEffect(() => {
+    if (!containerRef.current) return;
+    const resizeObserver = new ResizeObserver(([entry]) => {
+      setContainerHeight(entry.contentRect.height || 600);
+    });
+    resizeObserver.observe(containerRef.current);
+    return () => resizeObserver.disconnect();
+  }, []);
+
+  const baseVelocities = useMemo(() => {
+    const directionSign = direction === "up" ? 1 : -1;
+    return columnItems.map((_, index) => {
+      const alternatingSign = index % 2 === 0 ? 1 : -1;
+      return speed * columnFactor(index, variance) * directionSign * alternatingSign;
+    });
+  }, [columnItems, direction, speed, variance]);
+
+  useEffect(() => {
+    offsetsRef.current = columnMeta.map(
+      (meta, index) => meta.copyHeight * ((index * 0.37) % 1)
+    );
+    velocitiesRef.current = columnItems.map(() => 0);
+  }, [columnItems, columnMeta]);
+
+  const applyPlaneTransform = useCallback(
+    (pointerX: number, pointerY: number) => {
+      const plane = planeRef.current;
+      if (!plane) return;
+      plane.style.transform =
+        `translate(-50%, -50%) scale(1.18) ` +
+        `rotateX(${tilt + pointerY}deg) rotateY(${turn + pointerX}deg) rotateZ(${roll}deg) ` +
+        `translateZ(${-depth}px)`;
+    },
+    [depth, roll, tilt, turn]
+  );
+
+  useEffect(() => {
+    const animate = (timestamp: number) => {
+      if (lastTsRef.current === null) lastTsRef.current = timestamp;
+      const delta = Math.min(0.05, Math.max(0, timestamp - lastTsRef.current) / 1000);
+      lastTsRef.current = timestamp;
+
+      const maxTilt = parallax * 8;
+      const targetX = pointerRef.current.x * maxTilt;
+      const targetY = -pointerRef.current.y * maxTilt;
+      const damping = 1 - Math.exp(-delta / 0.12);
+      pointerDampedRef.current.x += (targetX - pointerDampedRef.current.x) * damping;
+      pointerDampedRef.current.y += (targetY - pointerDampedRef.current.y) * damping;
+      applyPlaneTransform(pointerDampedRef.current.x, pointerDampedRef.current.y);
+
+      columnMeta.forEach((meta, index) => {
+        const track = trackRefs.current[index];
+        if (!track) return;
+        const paused =
+          reduced ||
+          (wallHoveredRef.current && pauseOnHover) ||
+          hoveredColRef.current === index;
+        const target = paused ? 0 : baseVelocities[index];
+        const ease = 1 - Math.exp(-delta / (target === 0 ? 0.16 : 0.28));
+        velocitiesRef.current[index] +=
+          (target - velocitiesRef.current[index]) * ease;
+        const next =
+          ((offsetsRef.current[index] + velocitiesRef.current[index] * delta) %
+            meta.copyHeight +
+            meta.copyHeight) %
+          meta.copyHeight;
+        offsetsRef.current[index] = next;
+        track.style.transform = `translate3d(0, ${-next}px, 0)`;
+      });
+
+      rafRef.current = requestAnimationFrame(animate);
+    };
+
+    rafRef.current = requestAnimationFrame(animate);
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      rafRef.current = null;
+      lastTsRef.current = null;
+    };
+  }, [
+    applyPlaneTransform,
+    baseVelocities,
+    columnMeta,
+    parallax,
+    pauseOnHover,
+    reduced,
+  ]);
+
+  const activate = useCallback((id: string, column: number) => {
+    activeIdRef.current = id;
+    hoveredColRef.current = column;
+    setActiveId(id);
+  }, []);
+
+  const release = useCallback(() => {
+    activeIdRef.current = null;
+    hoveredColRef.current = -1;
+    setActiveId(null);
+  }, []);
+
+  const handlePointerMove = useCallback(
+    (event: PointerEvent<HTMLDivElement>) => {
+      const rect = containerRef.current?.getBoundingClientRect();
+      if (!rect) return;
+      if (parallax > 0 && !reduced) {
+        pointerRef.current = {
+          x: (event.clientX - rect.left) / rect.width - 0.5,
+          y: (event.clientY - rect.top) / rect.height - 0.5,
+        };
+      }
+      const target = document
+        .elementFromPoint(event.clientX, event.clientY)
+        ?.closest<HTMLElement>("[data-tile-id]");
+      const id = target?.dataset.tileId;
+      if (!id || id === activeIdRef.current) return;
+      activate(id, Number(target.dataset.col));
+    },
+    [activate, parallax, reduced]
+  );
+
+  const cssVars = useMemo(
+    () =>
+      ({
+        "--dw-tile-w": `${tileWidth}px`,
+        "--dw-tile-h": `${tileHeight}px`,
+        "--dw-gap": `${gap}px`,
+        "--dw-radius": `${radius}px`,
+        "--dw-perspective": `${perspective}px`,
+        "--dw-lift": `${lift}px`,
+        "--dw-dim": dim,
+        "--dw-gray": grayscale ? 1 : 0,
+        "--dw-overlay": overlayColor,
+        "--dw-edge": `${Math.max(0, (1 - fade) * 100)}%`,
+        ...style,
+      }) as CSSProperties,
+    [
+      dim,
+      fade,
+      gap,
+      grayscale,
+      lift,
+      overlayColor,
+      perspective,
+      radius,
+      style,
+      tileHeight,
+      tileWidth,
+    ]
+  );
+
+  const renderTile = (item: DriftWallItem, id: string, column: number) => {
+    const tile = (
+      <span className="drift-wall__inner">
+        <Image
+          src={withBasePath(item.image)}
+          alt={item.title ? `${item.title} logo` : ""}
+          fill
+          sizes={`${tileWidth}px`}
+          unoptimized
+          draggable={false}
+        />
+        <span className="drift-wall__overlay" aria-hidden="true" />
+        {item.title && (
+          <span className="drift-wall__title" aria-hidden="true">
+            {item.title}
+          </span>
+        )}
+      </span>
+    );
+    const commonProps = {
+      className: `drift-wall__tile${activeId === id ? " is-active" : ""}`,
+      "data-tile-id": id,
+      "data-col": column,
+      onFocus: () => activate(id, column),
+      onBlur: release,
+    };
+
+    if (item.href) {
+      return (
+        <a key={id} href={item.href} {...commonProps}>
+          {tile}
+        </a>
+      );
+    }
+
+    return (
+      <div
+        key={id}
+        tabIndex={0}
+        role="button"
+        aria-label={item.title ?? "Project logo"}
+        {...commonProps}
+      >
+        {tile}
+      </div>
+    );
+  };
+
+  return (
+    <div
+      ref={containerRef}
+      className={["drift-wall", reduced ? "drift-wall--reduced" : "", className]
+        .filter(Boolean)
+        .join(" ")}
+      style={cssVars}
+      onPointerMove={handlePointerMove}
+      onPointerEnter={() => {
+        wallHoveredRef.current = true;
+      }}
+      onPointerLeave={() => {
+        wallHoveredRef.current = false;
+        pointerRef.current = { x: 0, y: 0 };
+        release();
+      }}
+      role="group"
+      aria-label="Project logos"
+    >
+      <div ref={planeRef} className="drift-wall__plane">
+        {columnItems.map((columnItemsForWall, column) => {
+          const meta = columnMeta[column];
+          return (
+            <div className="drift-wall__col" key={`column-${column}`}>
+              <div
+                className="drift-wall__track"
+                ref={(element) => {
+                  trackRefs.current[column] = element;
+                }}
+              >
+                {Array.from({ length: meta.copies }).flatMap((_, copy) =>
+                  columnItemsForWall.map((item, itemIndex) =>
+                    renderTile(item, `${column}-${copy}-${itemIndex}`, column)
+                  )
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}

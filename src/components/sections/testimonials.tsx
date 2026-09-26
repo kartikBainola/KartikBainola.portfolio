@@ -21,7 +21,7 @@ export function TestimonialsSection() {
         <div className="h-80 w-[700px] rounded-full bg-accent-purple/5 blur-[100px]" />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           label="Testimonials"
           title="What People Say"
@@ -36,7 +36,7 @@ export function TestimonialsSection() {
                 <motion.div
                   whileHover={{ y: -5, rotateX: 1, rotateY: 1 }}
                   style={{ transformStyle: "preserve-3d", perspective: 800 }}
-                  className="group relative h-full overflow-hidden rounded-2xl border border-border bg-card p-8 transition-all duration-300 hover:border-accent-blue/30 hover:shadow-[0_12px_40px_rgba(0,0,0,0.3)] gradient-border-hover"
+                  className="group relative h-full min-w-0 overflow-hidden rounded-2xl border border-border bg-card p-5 transition-all duration-300 hover:border-accent-blue/30 hover:shadow-[0_12px_40px_rgba(0,0,0,0.3)] gradient-border-hover sm:p-8"
                 >
                   {/* Gradient top accent */}
                   <div className={`pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r ${avatarGradient} opacity-0 transition-opacity group-hover:opacity-100`} />
@@ -77,9 +77,9 @@ export function TestimonialsSection() {
                       </div>
                     </div>
 
-                    <div>
+                    <div className="min-w-0 flex-1">
                       <p className="text-sm font-bold">{testimonial.name}</p>
-                      <p className="text-xs text-muted-foreground mt-0.5">
+                      <p className="mt-0.5 break-words text-xs text-muted-foreground">
                         {testimonial.role} · {testimonial.company}
                       </p>
                     </div>

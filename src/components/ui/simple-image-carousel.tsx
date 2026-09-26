@@ -142,7 +142,7 @@ export const SimpleImageCarousel = React.forwardRef<
     >
       {/* Carousel stage */}
       <div
-        className="relative w-full h-[220px] sm:h-[320px] md:h-[460px] flex items-center justify-center overflow-hidden"
+        className="relative flex h-[clamp(11rem,58vw,220px)] w-full items-center justify-center overflow-hidden sm:h-[320px] md:h-[460px]"
         style={{ perspective: "1000px" }}
       >
         {items.map((item, index) => {
@@ -165,7 +165,7 @@ export const SimpleImageCarousel = React.forwardRef<
             <div
               key={index}
               aria-hidden={!isCenter}
-              className="absolute w-[9.5rem] h-[210px] sm:w-40 sm:h-[300px] md:w-60 md:h-[430px] rounded-3xl overflow-hidden border border-white/10 shadow-2xl transition-all duration-500 ease-in-out"
+              className="absolute h-[clamp(10.5rem,55vw,210px)] w-[clamp(8rem,38vw,9.5rem)] overflow-hidden rounded-3xl border border-white/10 shadow-2xl transition-all duration-500 ease-in-out sm:h-[300px] sm:w-40 md:h-[430px] md:w-60"
               style={{
                 transform: `translateX(${translateX}%) scale(${scale}) rotateY(${rotateY}deg)`,
                 zIndex: isCenter ? 10 : isAdjacent ? 5 : 1,

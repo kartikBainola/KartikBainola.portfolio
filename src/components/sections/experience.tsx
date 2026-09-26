@@ -35,10 +35,10 @@ export function ExperienceSection() {
           description="Building production applications across diverse industries and teams."
         />
 
-        <div className="grid gap-8 lg:grid-cols-[300px_1fr]">
+        <div className="grid gap-6 lg:grid-cols-[280px_1fr] lg:items-start">
           {/* ── Tab list ───────────────────────────── */}
           <FadeIn direction="left">
-            <div className="no-scrollbar relative -mx-4 flex flex-row gap-2 overflow-x-auto px-4 pb-2 snap-x snap-mandatory sm:mx-0 sm:px-0 lg:flex-col lg:overflow-visible lg:snap-none">
+            <div className="relative flex flex-col gap-2 pb-2 lg:sticky lg:top-24">
               <div className="absolute left-[18px] top-0 hidden h-full w-px bg-border lg:block" />
               <motion.div
                 className="absolute left-[18px] hidden w-px bg-gradient-to-b from-accent-blue via-accent-purple to-accent-cyan lg:block"
@@ -58,7 +58,7 @@ export function ExperienceSection() {
                     onClick={() => setActiveId(exp.id)}
                     data-cursor-hover
                     className={cn(
-                      "relative min-w-[11.5rem] shrink-0 snap-start rounded-xl border px-4 py-4 text-left transition-all cursor-pointer lg:ml-8 lg:min-w-0",
+                      "relative w-full min-w-0 rounded-xl border px-4 py-4 text-left transition-all cursor-pointer lg:ml-8",
                       isActive
                         ? "border-accent-blue/50 bg-muted glow-blue"
                         : "border-border bg-card hover:border-accent-blue/30"
@@ -72,7 +72,7 @@ export function ExperienceSection() {
                       {exp.company.charAt(0)}
                     </div>
 
-                    <span className="block text-sm font-bold leading-tight">{exp.company}</span>
+                    <span className="block break-words text-sm font-bold leading-tight">{exp.company}</span>
                     <p className="mt-1 text-xs text-muted-foreground">{exp.period}</p>
 
                     {isActive && (
@@ -96,7 +96,7 @@ export function ExperienceSection() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3 }}
-                className="relative overflow-hidden rounded-2xl border border-border bg-card p-5 sm:p-8"
+                className="relative min-w-0 overflow-hidden rounded-2xl border border-border bg-card p-5 sm:p-8"
               >
                 {/* Top gradient accent */}
                 <div className={`pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r ${activeColor}`} />
@@ -106,9 +106,9 @@ export function ExperienceSection() {
                     <div className={`flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${activeColor} text-sm font-black text-white shadow-lg`}>
                       {active.company.charAt(0)}
                     </div>
-                    <div>
-                      <h3 className="text-lg font-bold sm:text-xl">{active.role}</h3>
-                      <p className="mt-0.5 text-base font-semibold text-accent-blue">{active.company}</p>
+                    <div className="min-w-0">
+                      <h3 className="break-words text-lg font-bold sm:text-xl">{active.role}</h3>
+                      <p className="mt-0.5 break-words text-base font-semibold text-accent-blue">{active.company}</p>
                     </div>
                   </div>
                   <div className="flex flex-col gap-1.5 text-sm text-muted-foreground">

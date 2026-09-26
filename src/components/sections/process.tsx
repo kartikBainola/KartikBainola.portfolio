@@ -70,7 +70,8 @@ export function ProcessSection() {
         />
 
         {/* Desktop: horizontal flow */}
-        <div className="hidden gap-4 lg:grid lg:grid-cols-6">
+        <div className="relative hidden gap-4 lg:grid lg:grid-cols-6">
+          <div className="pointer-events-none absolute left-[8%] right-[8%] top-7 h-px bg-gradient-to-r from-accent-blue/40 via-accent-purple/40 to-accent-cyan/40" />
           {steps.map((step, index) => {
             const Icon = step.icon;
             return (
@@ -84,7 +85,7 @@ export function ProcessSection() {
                     <div className="absolute -right-2 top-7 z-20 h-px w-4 bg-gradient-to-r from-accent-blue/40 to-transparent" />
                   )}
 
-                  <div className="relative overflow-hidden rounded-2xl border border-border bg-card/80 p-5 transition-all duration-300 group-hover:border-transparent gradient-border-hover">
+                  <div className="relative overflow-hidden rounded-xl border border-border bg-card/80 p-5 pt-6 transition-all duration-300 group-hover:border-transparent gradient-border-hover">
                     {/* Gradient glow bg on hover */}
                     <div
                       className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"

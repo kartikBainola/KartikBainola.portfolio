@@ -108,7 +108,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
-      <div className="mx-auto max-w-3xl px-6 lg:px-8">
+      <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <Link
           href="/blog"
           className="mb-8 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
@@ -131,7 +131,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <h1 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
             {post.title}
           </h1>
-          <p className="mt-4 text-lg text-muted-foreground">{post.description}</p>
+          <p className="mt-4 break-words text-lg text-muted-foreground">{post.description}</p>
           <div className="mt-4 flex flex-wrap gap-2">
             {post.tags.map((tag) => (
               <span

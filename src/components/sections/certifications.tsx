@@ -21,13 +21,13 @@ export function CertificationsSection() {
             <FadeIn key={cert.id} delay={index * 0.1}>
               <motion.div
                 whileHover={{ y: -4 }}
-                className="group flex items-start gap-4 rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent-blue/30"
+                className="group flex min-w-0 items-start gap-3 rounded-2xl border border-border bg-card p-4 transition-all hover:border-accent-blue/30 sm:gap-4 sm:p-6"
               >
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-accent-blue/20 to-accent-purple/20">
                   <Award className="h-6 w-6 text-accent-blue" />
                 </div>
-                <div className="flex-1">
-                  <h3 className="font-bold">{cert.title}</h3>
+                <div className="min-w-0 flex-1">
+                  <h3 className="break-words font-bold">{cert.title}</h3>
                   <p className="mt-1 text-sm text-muted-foreground">
                     {cert.issuer} · {cert.date}
                   </p>

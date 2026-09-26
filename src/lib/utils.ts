@@ -5,12 +5,13 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-/** Prefix public asset paths for GitHub Pages (`basePath`). Skip for `next/image` / `next/link`. */
+/** Resolve public asset paths for local hosting and GitHub Pages (`basePath`). */
 export function withBasePath(path: string): string {
-  if (!path.startsWith("/") || path.startsWith("//")) return path;
+  if (/^(https?:|data:|blob:|\/\/)/.test(path)) return path;
+  const normalizedPath = path.startsWith("/") ? path : `/${path}`;
   const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-  if (!base || path === base || path.startsWith(`${base}/`)) return path;
-  return `${base}${path}`;
+  if (!base || normalizedPath === base || normalizedPath.startsWith(`${base}/`)) return normalizedPath;
+  return `${base}${normalizedPath}`;
 }
 
 export function formatDate(date: string): string {

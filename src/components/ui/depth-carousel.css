@@ -184,3 +184,27 @@
     transition: none;
   }
 }
+
+@media (max-width: 640px) {
+  .depth-carousel {
+    min-height: 280px;
+  }
+
+  .depth-carousel__arrow {
+    width: 36px;
+    height: 36px;
+  }
+
+  .depth-carousel__arrow--prev {
+    left: 2px;
+  }
+
+  .depth-carousel__arrow--next {
+    right: 2px;
+  }
+
+  .depth-carousel__card--device::before {
+    width: 52px;
+    height: 13px;
+  }
+}
