@@ -79,13 +79,13 @@ export function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
               value={search}
               onValueChange={setSearch}
               placeholder="Search pages, projects, actions..."
-              className="flex h-12 w-full bg-transparent px-3 text-sm outline-none placeholder:text-muted-foreground"
+              className="flex h-12 w-full min-w-0 bg-transparent px-3 text-base outline-none placeholder:text-muted-foreground sm:text-sm"
             />
             <kbd className="hidden sm:inline-flex h-5 items-center gap-1 rounded border border-border bg-muted px-1.5 text-[10px] font-medium text-muted-foreground">
               ESC
             </kbd>
           </div>
-          <Command.List className="max-h-80 overflow-y-auto p-2">
+          <Command.List className="max-h-[min(20rem,50dvh)] overflow-y-auto p-2">
             <Command.Empty className="py-6 text-center text-sm text-muted-foreground">
               No results found.
             </Command.Empty>
@@ -115,11 +115,11 @@ export function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
                 <Command.Item
                   key={project.id}
                   onSelect={() => navigate(`/projects/${project.id}`)}
-                  className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm cursor-pointer aria-selected:bg-muted"
+                  className="flex min-h-11 items-center gap-3 rounded-lg px-3 py-2.5 text-sm cursor-pointer aria-selected:bg-muted"
                 >
-                  <FolderOpen className="h-4 w-4" />
-                  {project.title}
-                  <span className="ml-auto text-xs text-muted-foreground">
+                  <FolderOpen className="h-4 w-4 shrink-0" />
+                  <span className="min-w-0 flex-1 truncate">{project.title}</span>
+                  <span className="shrink-0 text-xs text-muted-foreground">
                     {project.category}
                   </span>
                 </Command.Item>

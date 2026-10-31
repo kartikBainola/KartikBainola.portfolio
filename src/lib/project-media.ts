@@ -1,12 +1,14 @@
 import type { Project } from "@/types";
 
-export function getProjectLogo(project: Project): string {
-  return project.icon ?? project.image;
+export function getProjectLogo(project: Project): string | undefined {
+  return project.icon;
 }
 
 export function isLogoAsset(src: string, project: Project): boolean {
-  if (src === getProjectLogo(project)) return true;
+  const logo = getProjectLogo(project);
+  if (logo && src === logo) return true;
   if (src.includes("-icon.")) return true;
+  if (/logo/i.test(src)) return true;
   return false;
 }
 

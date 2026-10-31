@@ -23,7 +23,7 @@ export function CopyEmailButton({ email, className }: CopyEmailButtonProps) {
       onClick={handleCopy}
       data-cursor-hover
       className={cn(
-        "inline-flex h-11 min-w-0 w-full items-center justify-center gap-2 rounded-lg border border-border bg-muted/50 px-3 text-sm transition-all hover:border-accent-blue/50 hover:bg-muted sm:px-4",
+        "inline-flex h-11 min-w-0 w-full items-center justify-center gap-2 rounded-lg border border-border bg-muted/50 px-3 text-sm transition-all hover:border-accent-blue/50 hover:bg-muted sm:w-auto sm:flex-1 sm:px-4",
         className
       )}
     >

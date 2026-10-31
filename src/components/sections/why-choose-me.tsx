@@ -36,7 +36,7 @@ export function WhyChooseMeSection() {
     <section id="why-me" className="relative overflow-hidden py-16 sm:py-24 lg:py-32">
       {/* Background */}
       <div className="pointer-events-none absolute inset-x-0 top-0 flex justify-center">
-        <div className="h-80 w-[900px] rounded-full bg-accent-blue/4 blur-[120px]" />
+        <div className="h-80 w-[min(900px,100%)] rounded-full bg-accent-blue/4 blur-[120px]" />
       </div>
       <div className="pointer-events-none absolute inset-0 grid-pattern opacity-30" />
 

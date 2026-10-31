@@ -11,7 +11,7 @@ const posts = getAllPosts().slice(0, 3);
 export function BlogPreviewSection() {
   return (
     <section id="blog" className="relative py-24 sm:py-32 bg-card/30">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           label="Blog"
           title="Latest Articles"

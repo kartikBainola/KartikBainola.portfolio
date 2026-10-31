@@ -25,7 +25,7 @@ export function ArchitectureDiagram({ title, layers }: ArchitectureDiagramProps)
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ delay: index * 0.08 }}
-              className="inline-flex rounded-xl border border-border/70 bg-muted/30 px-4 py-2 text-sm font-medium"
+              className="inline-flex max-w-full rounded-xl border border-border/70 bg-muted/30 px-4 py-2 text-sm font-medium break-words"
             >
               {layer}
             </motion.div>

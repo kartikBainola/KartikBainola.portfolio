@@ -7,6 +7,7 @@ import { FadeIn } from "@/components/animations/fade-in";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { DriftWall } from "@/components/ui/drift-wall";
 import { projects, projectCategories } from "@/data/projects";
+import { getProjectLogo } from "@/lib/project-media";
 import { cn, withBasePath } from "@/lib/utils";
 
 export function ProjectGallerySection() {
@@ -55,7 +56,7 @@ export function ProjectGallerySection() {
                 className="group relative aspect-square overflow-hidden rounded-2xl border border-white/[0.08] bg-card"
               >
                 <Image
-                  src={withBasePath(project.icon ?? project.image)}
+                  src={withBasePath(getProjectLogo(project) ?? project.image)}
                   alt={`${project.title} logo`}
                   fill
                   unoptimized
@@ -72,7 +73,7 @@ export function ProjectGallerySection() {
           <div className="hidden h-[520px] overflow-hidden rounded-[2rem] border border-white/[0.06] bg-card/30 p-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] sm:block sm:h-[620px] sm:p-3">
             <DriftWall
               items={filtered.map((project) => ({
-                image: project.icon ?? project.image,
+                image: getProjectLogo(project) ?? project.image,
                 title: project.title,
                 href: `/projects/${project.id}`,
               }))}

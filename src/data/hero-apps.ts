@@ -13,7 +13,7 @@ export const heroApps: HeroApp[] = [
     title: "Ventuera",
     stack: "Flutter · Dart · Riverpod",
     video: "/videos/ventuera.webm",
-    poster: "/images/projects/ventuera-promo-1.png",
+    poster: "/images/screenshots/ventuera/iphone 4.png",
     href: "/projects/ventuera",
   },
   {
@@ -21,7 +21,7 @@ export const heroApps: HeroApp[] = [
     title: "CAPTO",
     stack: "Flutter · Dart · AI/OCR",
     video: "/videos/capto.webm",
-    poster: "/images/projects/capto-screenshot-2.png",
+    poster: "/images/screenshots/capto/2.jpeg",
     href: "/projects/capto",
   },
   {
@@ -29,7 +29,7 @@ export const heroApps: HeroApp[] = [
     title: "My Professional Rewards",
     stack: "Flutter · Dart · REST API",
     video: "/videos/myprofessionalrewards.webm",
-    poster: "/images/projects/my-professional-rewards-promo-1.png",
+    poster: "/images/screenshots/My Professional rewards/1.jpeg",
     href: "/projects/my-professional-rewards",
   },
   {

@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { SITE_CONFIG } from "./constants";
+import { SITE_CONFIG, absoluteUrl, pageUrl } from "./constants";
 
 export function createMetadata(overrides?: Partial<Metadata>): Metadata {
   return {
-    metadataBase: new URL(SITE_CONFIG.url),
+    metadataBase: new URL(pageUrl("/")),
     title: {
       default: `${SITE_CONFIG.name} — ${SITE_CONFIG.title}`,
       template: `%s | ${SITE_CONFIG.name}`,
@@ -21,18 +21,18 @@ export function createMetadata(overrides?: Partial<Metadata>): Metadata {
       "Flutter Web",
       "Mobile App Development",
     ],
-    authors: [{ name: SITE_CONFIG.name, url: SITE_CONFIG.url }],
+    authors: [{ name: SITE_CONFIG.name, url: pageUrl("/") }],
     creator: SITE_CONFIG.name,
     openGraph: {
       type: "website",
       locale: "en_US",
-      url: SITE_CONFIG.url,
+      url: pageUrl("/"),
       title: `${SITE_CONFIG.name} — ${SITE_CONFIG.title}`,
       description: SITE_CONFIG.description,
       siteName: SITE_CONFIG.name,
       images: [
         {
-          url: SITE_CONFIG.ogImage,
+          url: absoluteUrl(SITE_CONFIG.ogImage),
           width: 1200,
           height: 630,
           alt: `${SITE_CONFIG.name} — Portfolio`,
@@ -43,7 +43,7 @@ export function createMetadata(overrides?: Partial<Metadata>): Metadata {
       card: "summary_large_image",
       title: `${SITE_CONFIG.name} — ${SITE_CONFIG.title}`,
       description: SITE_CONFIG.description,
-      images: [SITE_CONFIG.ogImage],
+      images: [absoluteUrl(SITE_CONFIG.ogImage)],
     },
     robots: {
       index: true,
@@ -57,7 +57,7 @@ export function createMetadata(overrides?: Partial<Metadata>): Metadata {
       },
     },
     alternates: {
-      canonical: SITE_CONFIG.url,
+      canonical: pageUrl("/"),
     },
     ...overrides,
   };
@@ -69,7 +69,7 @@ export function createPersonJsonLd() {
     "@type": "Person",
     name: SITE_CONFIG.name,
     jobTitle: SITE_CONFIG.title,
-    url: SITE_CONFIG.url,
+    url: pageUrl("/"),
     email: SITE_CONFIG.email,
     address: {
       "@type": "PostalAddress",
@@ -97,7 +97,7 @@ export function createWebsiteJsonLd() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: `${SITE_CONFIG.name} Portfolio`,
-    url: SITE_CONFIG.url,
+    url: pageUrl("/"),
     description: SITE_CONFIG.description,
     author: {
       "@type": "Person",

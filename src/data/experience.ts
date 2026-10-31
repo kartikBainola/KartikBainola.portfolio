@@ -34,14 +34,11 @@ export const experiences: Experience[] = [
     period: "Nov 2024 — Feb 2025",
     location: "Dehradun, Uttarakhand (Remote)",
     description:
-      "Managed all phases of mobile application development, ensuring seamless UI/UX optimization and on-time project delivery.",
+      "Flutter development covering responsive UI, backend APIs, and Firebase.",
     responsibilities: [
-      "Managed end-to-end mobile application development lifecycle",
-      "Ensured seamless UI/UX optimization across all screen sizes",
-      "Solved technical challenges to deliver projects on time and within budget",
-      "Integrated backend APIs and Firebase services",
-      "Implemented responsive layouts and reusable widget components",
-      "Collaborated with cross-functional teams on feature delivery",
+      "Worked across the mobile application development lifecycle",
+      "Built responsive layouts and reusable Flutter widgets",
+      "Integrated backend APIs and Firebase",
     ],
     technologies: [
       "Flutter",
@@ -59,14 +56,12 @@ export const experiences: Experience[] = [
     period: "Nov 2024 — Feb 2025",
     location: "Dehradun, Uttarakhand (Remote)",
     description:
-      "Contributed to all stages of Flutter development, enhancing user experience with performance optimizations and efficient problem-solving.",
+      "Flutter development covering Bloc, Riverpod, authentication, push notifications, and performance work.",
     responsibilities: [
-      "Contributed to all stages of mobile application development",
-      "Enhanced user experience with performance optimizations",
-      "Addressed technical challenges efficiently for timely project completion",
-      "Implemented state management patterns with Bloc and Riverpod",
-      "Built responsive UI components with custom animations",
-      "Integrated push notifications and authentication flows",
+      "Implemented Bloc and Riverpod state management",
+      "Built responsive UI with custom animations",
+      "Integrated push notifications and authentication",
+      "Worked on performance optimizations",
     ],
     technologies: [
       "Flutter",
@@ -86,12 +81,9 @@ export const experiences: Experience[] = [
     description:
       "Built responsive Flutter UIs and developed a hybrid database application integrating diverse technologies for efficient data management.",
     responsibilities: [
-      "Built responsive UIs in Flutter with scalable styling approaches",
-      "Developed a hybrid database application with multi-technology integration",
-      "Implemented efficient data management and local storage solutions",
-      "Completed Mobile App Development Internship program",
-      "Collaborated on UI/UX design and feature implementation",
-      "Delivered project milestones within internship timeline",
+      "Built responsive Flutter UIs",
+      "Developed a hybrid database application with local storage",
+      "Completed the Mobile App Development internship",
     ],
     technologies: [
       "Flutter",

@@ -4,20 +4,20 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex min-h-11 items-center justify-center gap-2 whitespace-nowrap rounded-lg px-5 text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 cursor-pointer",
+  "inline-flex min-h-11 items-center justify-center gap-2 whitespace-nowrap rounded-lg px-5 font-sans text-sm font-medium transition-[color,background-color,border-color,opacity,transform] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 cursor-pointer active:scale-[0.97]",
   {
     variants: {
       variant: {
         default:
-          "bg-accent-blue text-white hover:bg-accent-blue/90 shadow-lg shadow-accent-blue/25",
+          "bg-accent text-accent-foreground hover:opacity-90",
         secondary:
-          "bg-card text-foreground border border-border hover:bg-muted hover:border-accent-blue/50",
+          "bg-transparent text-foreground border border-border hover:bg-muted",
         ghost: "hover:bg-muted text-muted-foreground hover:text-foreground",
         outline:
-          "bg-card text-foreground border border-border hover:bg-muted hover:border-accent-blue/50",
+          "bg-transparent text-foreground border border-border hover:bg-muted",
         gradient:
-          "bg-accent-blue text-white hover:bg-accent-blue/90 shadow-lg shadow-accent-blue/25",
-        link: "text-accent-blue underline-offset-4 hover:underline",
+          "bg-accent text-accent-foreground hover:opacity-90",
+        link: "text-accent underline-offset-4 hover:underline",
       },
       size: {
         default: "h-11 py-2",

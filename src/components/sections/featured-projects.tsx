@@ -1,228 +1,179 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { ArrowRight, ExternalLink, Code2, Star } from "lucide-react";
-import { FadeIn } from "@/components/animations/fade-in";
-import { SectionHeading } from "@/components/ui/section-heading";
-import { ProjectVisual } from "@/components/ui/project-visual";
+import { ArrowUpRight } from "lucide-react";
+import { contributions } from "@/data/case-studies";
 import { projects } from "@/data/projects";
-import { getProjectLogo, getProjectScreenshots } from "@/lib/project-media";
-import { Button } from "@/components/ui/button";
-import { withBasePath } from "@/lib/utils";
+import { getProjectScreenshots } from "@/lib/project-media";
+import { ProjectMark } from "@/components/ui/project-mark";
+import { ScreenshotGallery } from "@/components/ui/screenshot-gallery";
+import ScrollStack, { ScrollStackItem } from "@/components/ui/scroll-stack";
+import type { ReactNode } from "react";
+import type { Project } from "@/types";
+
+const LIST_SCREENSHOTS = 5;
+
+function ProjectStack({ children }: { children: ReactNode }) {
+  return (
+    <ScrollStack
+      className="scroll-stack--projects"
+      useWindowScroll
+      smoothScroll={false}
+      itemDistance={64}
+      itemStackDistance={18}
+      stackPosition={120}
+      itemScale={0.04}
+      baseScale={0.9}
+      dimAmount={0.28}
+      holdDistance={160}
+    >
+      {children}
+    </ScrollStack>
+  );
+}
 
 export function FeaturedProjectsSection() {
   const featured = projects.filter((project) => project.featured);
+  const others = projects.filter((project) => !project.featured);
 
   return (
-    <section id="projects" className="relative overflow-hidden bg-card/30 py-16 sm:py-24 lg:py-32">
-      {/* Background glow */}
-      <div className="pointer-events-none absolute inset-x-0 top-1/2 flex -translate-y-1/2 justify-center">
-        <div className="h-[600px] w-[800px] rounded-full bg-accent-blue/4 blur-[140px]" />
-      </div>
+    <section
+      id="projects"
+      className="relative z-10 -mt-8 rounded-t-[2rem] bg-background px-4 py-16 sm:-mt-10 sm:rounded-t-[2.75rem] sm:px-8 sm:py-20 md:rounded-t-[3.5rem] md:px-10"
+    >
+      <div className="mx-auto max-w-6xl">
+        <h2 className="display-heading text-center font-sans text-[clamp(2.15rem,8vw,5.5rem)] leading-none font-semibold tracking-tight uppercase">
+          Projects
+        </h2>
+        <p className="mx-auto mt-4 max-w-xl text-center text-sm leading-relaxed text-muted-foreground sm:text-base">
+          Three applications shipped for Android, iOS, or both.
+        </p>
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <SectionHeading
-          label="Selected Work"
-          title="Production Applications"
-          description="Real products shipped across Android and iOS with maintainable architecture and polished UX."
-        />
-
-        <div className="space-y-20">
+        <ProjectStack>
           {featured.map((project, index) => (
-            <FadeIn key={project.id} delay={index * 0.06}>
-              <motion.article
-                whileHover={{ y: -3 }}
-                className="group relative overflow-hidden rounded-3xl border border-border bg-card/90 transition-all duration-500 hover:border-accent-blue/30 hover:shadow-[0_20px_80px_rgba(0,0,0,0.4)]"
-              >
-                {/* Project number — large faded */}
-                <span className="pointer-events-none absolute right-6 top-4 hidden select-none text-[8rem] font-black leading-none text-foreground/[0.03] sm:block sm:text-[10rem]">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-
-                {/* Featured badge on first card */}
-                {index === 0 && (
-                  <div className="absolute left-5 top-5 z-20 flex items-center gap-1.5 rounded-full border border-amber-400/30 bg-amber-400/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-amber-400">
-                    <Star className="h-2.5 w-2.5 fill-amber-400" />
-                    Featured
-                  </div>
-                )}
-
-                <div className="grid gap-0 lg:grid-cols-[1.1fr_1fr]">
-                  {/* ── Visual area ───────────────────────── */}
-                  <div className={`relative min-h-[16rem] overflow-hidden sm:min-h-[22rem] ${index % 2 === 1 ? "lg:order-2" : ""}`}>
-                    {(() => {
-                      const screenshots = getProjectScreenshots(project).slice(0, 3);
-
-                      if (screenshots.length === 0) {
-                        return (
-                          <ProjectVisual
-                            title={project.title}
-                            icon={getProjectLogo(project)}
-                            color={project.color}
-                            category={project.category}
-                            variant="featured"
-                            className="h-full min-h-[16rem] sm:min-h-[22rem]"
-                            logoBackground={project.logoBackground}
-                          />
-                        );
-                      }
-
-                      return (
-                        <>
-                          {/* Dynamic color gradient */}
-                          <div
-                            className="absolute inset-0"
-                            style={{
-                              background: `linear-gradient(135deg, ${project.color ?? "rgba(59,130,246,0.2)"} 0%, transparent 60%, rgba(139,92,246,0.15) 100%)`,
-                            }}
-                          />
-                          <div className="absolute inset-0 grid-pattern opacity-30" />
-
-                          <div className="relative flex h-full items-end justify-center gap-2 px-3 pt-10 sm:gap-4 sm:px-6 sm:pt-12">
-                            {screenshots.map((screenshot, shotIndex) => {
-                              const isPoster = project.screenshotStyle === "poster";
-                              return (
-                                <motion.div
-                                  key={screenshot}
-                                  initial={{ opacity: 0, y: 24 }}
-                                  whileInView={{ opacity: 1, y: 0 }}
-                                  viewport={{ once: true }}
-                                  transition={{ delay: 0.12 + shotIndex * 0.1 }}
-                                  whileHover={{ y: -10, scale: 1.02 }}
-                                  data-cursor="image"
-                                  className={
-                                    isPoster
-                                      ? `relative w-[72px] overflow-hidden rounded-2xl border border-white/10 bg-zinc-900 shadow-2xl shadow-black/50 sm:w-[118px] md:w-[158px] ${
-                                          shotIndex === 1 ? "mb-6 z-20 sm:mb-8" : "mb-1 opacity-95 sm:mb-2"
-                                        }`
-                                      : `relative w-[74px] overflow-hidden rounded-[1.4rem] border-[3px] border-zinc-800 bg-zinc-900 shadow-2xl shadow-black/40 sm:w-[120px] sm:border-[4px] md:w-[145px] ${
-                                          shotIndex === 1 ? "mb-6 z-20 sm:mb-10" : "mb-1 opacity-90 sm:mb-2"
-                                        }`
-                                  }
-                                >
-                                  {!isPoster && (
-                                    <div className="absolute left-1/2 top-2.5 z-10 h-3.5 w-14 -translate-x-1/2 rounded-full bg-zinc-700" />
-                                  )}
-                                  <div className={isPoster ? "relative aspect-[3/4]" : "relative aspect-[9/19]"}>
-                                    <Image
-                                      src={withBasePath(screenshot)}
-                                      alt={`${project.title} screenshot ${shotIndex + 1}`}
-                                      fill
-                                      unoptimized
-                                      sizes="(max-width: 640px) 120px, 160px"
-                                      className={
-                                        isPoster
-                                          ? "object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                                          : "object-cover object-top transition-transform duration-700 group-hover:scale-[1.05]"
-                                      }
-                                    />
-                                  </div>
-                                </motion.div>
-                              );
-                            })}
-                          </div>
-                        </>
-                      );
-                    })()}
-                  </div>
-
-                  {/* ── Content area ──────────────────────── */}
-                  <div className={`flex flex-col justify-center p-5 sm:p-10 ${index % 2 === 1 ? "lg:order-1" : ""}`}>
-                    <p className="text-xs font-bold tracking-[0.22em] uppercase text-muted-foreground">
-                      {project.category}
-                    </p>
-                    <h3 className="mt-2 text-2xl font-black tracking-tight sm:text-4xl">
-                      {project.title}
-                    </h3>
-                    <p className="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
-                      {project.longDescription}
-                    </p>
-
-                    {/* Tech tags — tinted by project color */}
-                    <div className="mt-5 flex flex-wrap gap-2">
-                      {project.technologies.slice(0, 6).map((tech) => (
-                        <span
-                          key={tech}
-                          className="rounded-full border border-border/70 bg-muted/40 px-3 py-1 text-xs font-semibold text-muted-foreground transition-colors group-hover:border-accent-blue/30 group-hover:bg-accent-blue/5"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* Store badges */}
-                    {(project.playStore || project.appStore) && (
-                      <div className="mt-5 flex flex-wrap items-center gap-2">
-                        {project.playStore && (
-                          <a
-                            href={project.playStore}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-emerald-400/30 bg-emerald-500/10 px-4 py-2 text-xs font-bold text-emerald-400 transition-all hover:bg-emerald-500/20"
-                            data-cursor="link"
-                          >
-                            <span className="relative flex h-2 w-2">
-                              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-50" />
-                              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
-                            </span>
-                            Live on Google Play
-                          </a>
-                        )}
-                        {project.appStore && (
-                          <a
-                            href={project.appStore}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-sky-400/30 bg-sky-500/10 px-4 py-2 text-xs font-bold text-sky-400 transition-all hover:bg-sky-500/20"
-                            data-cursor="link"
-                          >
-                            <span className="relative flex h-2 w-2">
-                              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-50" />
-                              <span className="relative inline-flex h-2 w-2 rounded-full bg-sky-400" />
-                            </span>
-                            Live on App Store
-                          </a>
-                        )}
-                      </div>
-                    )}
-
-                    {/* CTA buttons */}
-                    <div className="mt-8 flex flex-wrap gap-3">
-                      <Button asChild variant="gradient" className="group/btn relative overflow-hidden">
-                        <Link href={`/projects/${project.id}`} data-cursor="button">
-                          <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/15 to-transparent transition-transform duration-700 group-hover/btn:translate-x-full" />
-                          View Case Study
-                          <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-0.5" />
-                        </Link>
-                      </Button>
-
-                      {project.playStore && (
-                        <Button asChild variant="outline">
-                          <a href={project.playStore} target="_blank" rel="noopener noreferrer" data-cursor="link">
-                            <ExternalLink className="h-4 w-4" />
-                            Live App
-                          </a>
-                        </Button>
-                      )}
-
-                      {project.github && (
-                        <Button asChild variant="ghost">
-                          <a href={project.github} target="_blank" rel="noopener noreferrer" data-cursor="link">
-                            <Code2 className="h-4 w-4" />
-                            Source
-                          </a>
-                        </Button>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </motion.article>
-            </FadeIn>
+            <ScrollStackItem key={project.id}>
+              <ProjectPanel index={index} project={project} />
+            </ScrollStackItem>
           ))}
-        </div>
+        </ProjectStack>
+
+        {others.length > 0 && (
+          <div className="mt-20">
+            <h3 className="text-2xl sm:text-3xl">Other shipped applications</h3>
+            <div className="mt-6">
+              <ProjectStack>
+                {others.map((project) => (
+                  <ScrollStackItem key={project.id}>
+                    <OtherProjectCard project={project} />
+                  </ScrollStackItem>
+                ))}
+              </ProjectStack>
+            </div>
+          </div>
+        )}
       </div>
     </section>
+  );
+}
+
+function OtherProjectCard({ project }: { project: Project }) {
+  const shots = getProjectScreenshots(project).slice(0, LIST_SCREENSHOTS);
+
+  return (
+    <article className="project-card overflow-hidden rounded-[1.75rem] border border-border bg-card p-4 sm:rounded-[2rem] sm:p-6">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div className="flex max-w-2xl gap-3">
+          <span
+            className="relative mt-0.5 h-11 w-11 shrink-0 overflow-hidden rounded-xl border border-border"
+            style={{ background: project.logoBackground ?? "var(--muted)" }}
+          >
+            <ProjectMark project={project} />
+          </span>
+          <div>
+            <p className="font-sans text-base font-medium text-foreground">{project.title}</p>
+            <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{project.description}</p>
+          </div>
+        </div>
+        <div className="flex shrink-0 flex-wrap gap-x-4 gap-y-1 font-sans text-sm">
+          <Link href={`/projects/${project.id}`} className="inline-flex min-h-11 items-center text-foreground">
+            Notes
+          </Link>
+          {project.playStore && (
+            <a href={project.playStore} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-muted-foreground hover:text-foreground">
+              Play
+            </a>
+          )}
+          {project.appStore && (
+            <a href={project.appStore} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-muted-foreground hover:text-foreground">
+              App Store
+            </a>
+          )}
+        </div>
+      </div>
+      {shots.length > 0 && (
+        <div className="mt-4">
+          <ScreenshotGallery images={shots} title={project.title} />
+        </div>
+      )}
+    </article>
+  );
+}
+
+function ProjectPanel({ project, index }: { project: Project; index: number }) {
+  const shots = getProjectScreenshots(project);
+
+  return (
+      <article className="project-card overflow-hidden rounded-[1.75rem] border border-border bg-card p-4 sm:rounded-[2rem] sm:p-6 md:p-8">
+        <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+          <div className="min-w-0">
+            <p className="font-sans text-4xl leading-none font-semibold tracking-tight sm:text-5xl">
+              {String(index + 1).padStart(2, "0")}
+            </p>
+            <p className="mt-3 font-sans text-xs tracking-[0.16em] text-muted-foreground uppercase">
+              {project.category}
+            </p>
+            <div className="mt-2 flex items-center gap-3">
+              <span
+                className="relative h-11 w-11 shrink-0 overflow-hidden rounded-xl border border-border"
+                style={{ background: project.logoBackground ?? "var(--muted)" }}
+              >
+                <ProjectMark project={project} />
+              </span>
+              <h3 className="text-3xl break-words sm:text-4xl">{project.title}</h3>
+            </div>
+          </div>
+          <Link
+            href={`/projects/${project.id}`}
+            className="inline-flex min-h-11 w-fit items-center gap-2 rounded-full border border-foreground/30 px-5 py-2.5 font-sans text-xs tracking-[0.16em] uppercase transition-colors duration-200 hover:bg-foreground/5 sm:text-sm"
+          >
+            Case study
+            <ArrowUpRight className="h-4 w-4" />
+          </Link>
+        </div>
+
+        <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+          {project.description}
+        </p>
+        {contributions[project.id] && (
+          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-foreground/80">{contributions[project.id]}</p>
+        )}
+
+        <div className="mt-5">
+          <ScreenshotGallery images={shots.slice(0, LIST_SCREENSHOTS)} title={project.title} />
+        </div>
+
+        <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 font-sans text-sm">
+          {project.playStore && (
+            <a href={project.playStore} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-muted-foreground transition-colors duration-200 hover:text-foreground">
+              Google Play
+            </a>
+          )}
+          {project.appStore && (
+            <a href={project.appStore} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-muted-foreground transition-colors duration-200 hover:text-foreground">
+              {project.appStore.includes("/search") ? "App Store search" : "App Store"}
+            </a>
+          )}
+        </div>
+      </article>
   );
 }

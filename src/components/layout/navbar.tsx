@@ -1,30 +1,31 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Sun, Moon, Laptop } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Laptop, Menu, Moon, Sun, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/components/providers/theme-provider";
-import { NAV_LINKS, SITE_CONFIG } from "@/lib/constants";
+import { NAV_LINKS } from "@/lib/constants";
+import { DURATION, EASE_OUT } from "@/lib/motion";
 import { cn, withBasePath } from "@/lib/utils";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("about");
+  const [activeSection, setActiveSection] = useState("");
   const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    const handleScroll = () => setIsScrolled(window.scrollY > 8);
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Active section detection
   useEffect(() => {
-    const sections = NAV_LINKS.map((l) => l.href.replace("#", ""));
+    const sections = ["hero", ...NAV_LINKS.map((link) => link.href.replace("#", ""))];
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -42,58 +43,67 @@ export function Navbar() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = isMobileOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMobileOpen]);
+
+  useEffect(() => {
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    const closeOnDesktop = () => {
+      if (desktop.matches) setIsMobileOpen(false);
+    };
+    desktop.addEventListener("change", closeOnDesktop);
+    return () => desktop.removeEventListener("change", closeOnDesktop);
+  }, []);
+
+  useEffect(() => {
+    if (!isMobileOpen) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsMobileOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [isMobileOpen]);
+
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 pt-[env(safe-area-inset-top)]",
-        isScrolled
-          ? "glass border-b border-border/50 py-3"
-          : "bg-transparent py-5"
+        "fixed top-0 right-0 left-0 z-50 border-b pt-[env(safe-area-inset-top)] transition-colors duration-300",
+        isScrolled ? "border-border bg-background" : "border-transparent bg-background/80"
       )}
     >
-      <nav className="mx-auto flex max-w-7xl items-center justify-between gap-2 px-3 sm:px-6 lg:px-8">
-        {/* Logo */}
-        <Link href="/" className="group flex min-w-0 items-center gap-2.5" data-cursor-hover>
-            <div className="relative h-8 w-8 shrink-0 rounded-lg overflow-hidden">
-            <Image src={withBasePath("/kb-mark.png")} alt="KB" fill className="object-contain" />
-          </div>
-          <span className="hidden truncate text-sm font-bold tracking-tight min-[380px]:inline sm:text-base">Kartik Bainola</span>
+      <nav className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8" aria-label="Primary">
+        <Link href="/" className="flex min-w-0 items-center gap-2.5">
+          <span className="relative h-8 w-8 shrink-0 overflow-hidden rounded-md">
+            <Image src={withBasePath("/kb-mark.png")} alt="" fill className="object-contain" />
+          </span>
+          <span className="truncate font-sans text-sm font-medium">Kartik Bainola</span>
         </Link>
 
-        {/* Desktop nav */}
-        <div className="hidden items-center gap-1 md:flex">
+        <div className="hidden items-center gap-1 lg:flex">
           {NAV_LINKS.map((link) => {
             const isActive = activeSection === link.href.replace("#", "");
             return (
               <Link
                 key={link.href}
                 href={link.href}
-                data-cursor-hover
+                data-active={isActive}
                 className={cn(
-                  "relative rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                  "nav-link rounded-md px-3 py-2 font-sans text-sm transition-colors duration-200",
                   isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 {link.label}
-                {isActive && (
-                  <motion.span
-                    layoutId="navIndicator"
-                    className="absolute bottom-0.5 left-1/2 h-0.5 w-4 -translate-x-1/2 rounded-full bg-gradient-to-r from-accent-blue to-accent-purple"
-                  />
-                )}
               </Link>
             );
           })}
         </div>
 
-        {/* Right controls */}
-        <div className="flex shrink-0 items-center gap-1 sm:gap-2">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={toggleTheme}
-            aria-label="Toggle theme"
-          >
+        <div className="flex items-center gap-1">
+          <Button variant="ghost" size="icon" onClick={toggleTheme} aria-label="Toggle color theme">
             {theme === "dark" ? (
               <Sun className="h-4 w-4" />
             ) : theme === "light" ? (
@@ -102,84 +112,47 @@ export function Navbar() {
               <Laptop className="h-4 w-4" />
             )}
           </Button>
-
-          {/* Hire Me opens the contact form */}
-          <a
-            href="#contact"
-            data-cursor-hover
-            className="hidden min-[420px]:inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-accent-blue to-accent-purple px-3 py-1.5 text-xs font-bold text-white shadow-[0_0_20px_rgba(59,130,246,0.25)] transition-all duration-300 hover:shadow-[0_0_30px_rgba(59,130,246,0.4)] hover:scale-[1.02] relative overflow-hidden group sm:px-4 sm:py-2 sm:text-sm"
-          >
-            <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/15 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
-            Hire Me
-          </a>
-
-          {/* Freelance services open Nexivo */}
-          <a
-            href={SITE_CONFIG.freelanceUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            data-cursor-hover
-            className="hidden min-[420px]:inline-flex items-center rounded-lg border border-accent-emerald/40 bg-accent-emerald/10 px-2.5 py-1.5 text-[11px] font-bold text-accent-emerald transition-colors hover:border-accent-emerald/60 hover:bg-accent-emerald/20 sm:px-3 sm:py-2 sm:text-xs"
-          >
-            <span className="hidden min-[420px]:inline">Available for </span>Freelance
-          </a>
-
           <Button
             variant="ghost"
             size="icon"
-            className="md:hidden"
-            onClick={() => setIsMobileOpen(!isMobileOpen)}
-            aria-label="Toggle menu"
+            className="lg:hidden"
+            onClick={() => setIsMobileOpen((open) => !open)}
+            aria-expanded={isMobileOpen}
+            aria-controls="mobile-navigation"
+            aria-label={isMobileOpen ? "Close menu" : "Open menu"}
           >
             {isMobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </Button>
         </div>
       </nav>
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {isMobileOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="glass border-b border-border/50 md:hidden"
+            id="mobile-navigation"
+            initial={false}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 1, y: 0 }}
+            transition={{ duration: DURATION.micro, ease: EASE_OUT }}
+            className="max-h-[min(28rem,calc(100dvh-4.5rem-env(safe-area-inset-top,0px)))] overflow-y-auto border-t border-border bg-background pb-[env(safe-area-inset-bottom,0px)] lg:hidden"
           >
-            <div className="flex flex-col gap-1 px-4 py-4 sm:px-6">
+            <div className="flex flex-col gap-1 px-4 py-3 sm:px-6">
               {NAV_LINKS.map((link) => {
                 const isActive = activeSection === link.href.replace("#", "");
                 return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setIsMobileOpen(false)}
-                  className={cn(
-                    "rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
-                    isActive
-                      ? "bg-accent-blue/10 text-accent-blue"
-                      : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                  )}
-                >
-                  {link.label}
-                </Link>
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setIsMobileOpen(false)}
+                    className={cn(
+                      "flex min-h-11 items-center rounded-md px-3 font-sans text-sm",
+                      isActive ? "bg-muted text-foreground" : "text-muted-foreground"
+                    )}
+                  >
+                    {link.label}
+                  </Link>
                 );
               })}
-              <Link
-                href="#contact"
-                onClick={() => setIsMobileOpen(false)}
-                className="mt-2 flex items-center justify-center gap-1.5 rounded-lg bg-gradient-to-r from-accent-blue to-accent-purple px-4 py-2.5 text-sm font-bold text-white"
-              >
-                Hire Me
-              </Link>
-              <a
-                href={SITE_CONFIG.freelanceUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setIsMobileOpen(false)}
-                className="flex items-center justify-center gap-1.5 rounded-lg border border-accent-emerald/40 bg-accent-emerald/10 px-4 py-2.5 text-sm font-bold text-accent-emerald"
-              >
-                Available for Freelance
-              </a>
             </div>
           </motion.div>
         )}

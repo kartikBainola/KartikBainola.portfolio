@@ -1,13 +1,21 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Geist_Mono } from "next/font/google";
+import { Instrument_Sans, Instrument_Serif, Geist_Mono } from "next/font/google";
 import { Providers } from "@/components/providers";
 import { MainLayout } from "@/components/layout/main-layout";
 import { createMetadata, createPersonJsonLd, createWebsiteJsonLd } from "@/lib/seo";
+import { withBasePath } from "@/lib/utils";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+const instrumentSans = Instrument_Sans({
+  variable: "--font-instrument-sans",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument-serif",
+  subsets: ["latin"],
+  weight: "400",
   display: "swap",
 });
 
@@ -24,7 +32,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   viewportFit: "cover",
-  themeColor: "#030712",
+  themeColor: "#101418",
 };
 
 export default function RootLayout({
@@ -46,12 +54,11 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
-        <link rel="icon" href="/favicon-32x32.png" sizes="32x32" />
-        <link rel="icon" href="/favicon-16x16.png" sizes="16x16" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="icon" href={withBasePath("/favicon-32x32.png")} type="image/png" sizes="32x32" />
+        <link rel="icon" href={withBasePath("/favicon-16x16.png")} type="image/png" sizes="16x16" />
       </head>
       <body
-        className={`${inter.variable} ${geistMono.variable} min-h-screen bg-background text-foreground antialiased`}
+        className={`${instrumentSans.variable} ${instrumentSerif.variable} ${geistMono.variable} min-h-screen bg-background font-sans text-foreground antialiased`}
         suppressHydrationWarning
       >
         <Providers>

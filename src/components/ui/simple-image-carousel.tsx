@@ -109,6 +109,7 @@ export const SimpleImageCarousel = React.forwardRef<
   );
 
   const [isMobile, setIsMobile] = React.useState(false);
+  const dragStart = React.useRef<{ x: number; y: number } | null>(null);
 
   React.useEffect(() => {
     const mq = window.matchMedia("(max-width: 640px)");
@@ -127,9 +128,26 @@ export const SimpleImageCarousel = React.forwardRef<
   }, [items.length]);
 
   React.useEffect(() => {
+    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (motion.matches) return;
     const timer = setInterval(handleNext, autoplayDelay);
     return () => clearInterval(timer);
   }, [handleNext, autoplayDelay]);
+
+  const onPointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+    dragStart.current = { x: event.clientX, y: event.clientY };
+  };
+
+  const onPointerUp = (event: React.PointerEvent<HTMLDivElement>) => {
+    const start = dragStart.current;
+    dragStart.current = null;
+    if (!start) return;
+    const dx = event.clientX - start.x;
+    const dy = event.clientY - start.y;
+    if (Math.abs(dx) < 48 || Math.abs(dx) < Math.abs(dy)) return;
+    if (dx > 0) handlePrev();
+    else handleNext();
+  };
 
   return (
     <div
@@ -142,7 +160,9 @@ export const SimpleImageCarousel = React.forwardRef<
     >
       {/* Carousel stage */}
       <div
-        className="relative flex h-[clamp(11rem,58vw,220px)] w-full items-center justify-center overflow-hidden sm:h-[320px] md:h-[460px]"
+        className="relative flex h-[clamp(11rem,58vw,220px)] w-full max-w-full touch-pan-y items-center justify-center overflow-hidden sm:h-[320px] md:h-[460px] [@media(max-height:500px)]:h-[min(11rem,70dvh)]"
+        onPointerDown={onPointerDown}
+        onPointerUp={onPointerUp}
         style={{ perspective: "1000px" }}
       >
         {items.map((item, index) => {
@@ -185,37 +205,41 @@ export const SimpleImageCarousel = React.forwardRef<
       </div>
 
       {/* Nav + Dots */}
-      <div className="flex items-center gap-4 z-20">
+      <div className="z-20 flex w-full max-w-sm items-center justify-center gap-2 sm:gap-4">
         <Button
           variant="outline"
           size="icon"
-          className="rounded-full h-9 w-9 bg-background/50 backdrop-blur-sm border-border/50"
+          className="h-11 w-11 rounded-full border-border/50 bg-background/50 backdrop-blur-sm"
           onClick={handlePrev}
           aria-label="Previous"
         >
           <ChevronLeft className="h-4 w-4" />
         </Button>
 
-        <div className="flex items-center gap-2">
+        <div className="flex min-w-0 flex-1 items-center justify-center gap-0.5 sm:gap-1">
           {items.map((_, index) => (
             <button
               key={index}
+              type="button"
               onClick={() => setCurrentIndex(index)}
               aria-label={`Go to slide ${index + 1}`}
-              className={cn(
-                "h-1.5 rounded-full transition-all duration-300 cursor-pointer",
-                currentIndex === index
-                  ? "w-5 bg-foreground"
-                  : "w-1.5 bg-foreground/25 hover:bg-foreground/50"
-              )}
-            />
+              aria-current={currentIndex === index ? "true" : undefined}
+              className="inline-flex h-11 min-w-8 flex-1 items-center justify-center sm:w-11 sm:flex-none"
+            >
+              <span
+                className={cn(
+                  "h-1.5 rounded-full transition-all duration-300",
+                  currentIndex === index ? "w-5 bg-foreground" : "w-1.5 bg-foreground/25"
+                )}
+              />
+            </button>
           ))}
         </div>
 
         <Button
           variant="outline"
           size="icon"
-          className="rounded-full h-9 w-9 bg-background/50 backdrop-blur-sm border-border/50"
+          className="h-11 w-11 rounded-full border-border/50 bg-background/50 backdrop-blur-sm"
           onClick={handleNext}
           aria-label="Next"
         >

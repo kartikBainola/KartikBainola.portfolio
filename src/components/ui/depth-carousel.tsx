@@ -347,7 +347,7 @@ export default function DepthCarousel({
       const width = entries[0].contentRect.width;
       const cfg = cfgRef.current;
       const needed = cfg.cardWidth + Math.abs(cfg.spread) * 2 + 120;
-      scaleRef.current = clamp(width / needed, 0.55, 1);
+      scaleRef.current = clamp(width / needed, 0.28, 1);
       layout(posRef.current);
     });
     observer.observe(root);

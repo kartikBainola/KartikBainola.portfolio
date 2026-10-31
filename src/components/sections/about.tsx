@@ -36,7 +36,7 @@ export function AboutSection() {
   return (
     <section id="about" className="relative overflow-hidden py-16 sm:py-24 lg:py-32">
       {/* radial glow */}
-      <div className="pointer-events-none absolute left-0 top-1/2 h-96 w-96 -translate-y-1/2 rounded-full bg-accent-blue/5 blur-[100px]" />
+      <div className="pointer-events-none absolute top-1/2 left-0 h-96 w-[min(24rem,80vw)] -translate-y-1/2 rounded-full bg-accent-blue/5 blur-[100px]" />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading

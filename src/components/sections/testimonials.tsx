@@ -18,7 +18,7 @@ export function TestimonialsSection() {
     <section id="testimonials" className="relative py-24 sm:py-32 bg-card/30 overflow-hidden">
       {/* Decorative background */}
       <div className="pointer-events-none absolute inset-x-0 top-0 flex justify-center">
-        <div className="h-80 w-[700px] rounded-full bg-accent-purple/5 blur-[100px]" />
+        <div className="h-80 w-[min(700px,100%)] rounded-full bg-accent-purple/5 blur-[100px]" />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -69,7 +69,7 @@ export function TestimonialsSection() {
                   </blockquote>
 
                   {/* Author */}
-                  <div className="mt-7 flex items-center gap-3.5">
+                  <div className="mt-7 flex flex-wrap items-center gap-3.5">
                     {/* Avatar with gradient ring */}
                     <div className={`relative h-11 w-11 rounded-full bg-gradient-to-br ${avatarGradient} p-0.5 shadow-lg`}>
                       <div className="flex h-full w-full items-center justify-center rounded-full bg-card text-sm font-black text-foreground">

@@ -41,16 +41,14 @@ export interface Skill {
   name: string;
   icon: string;
   category: SkillCategory;
+  detail: string;
 }
 
 export type SkillCategory =
   | "Mobile Development"
-  | "Backend"
-  | "State Management"
-  | "Deployment"
-  | "Tools"
-  | "Cloud"
-  | "Architecture";
+  | "Architecture and State Management"
+  | "Backend and Integrations"
+  | "Development and Delivery";
 
 export interface Service {
   id: string;

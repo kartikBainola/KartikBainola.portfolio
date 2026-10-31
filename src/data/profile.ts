@@ -6,14 +6,14 @@ export const profile = {
   subtitle: "Flutter · Android · iOS · Flutter Web",
   location: "Dehradun, Uttarakhand, India",
   summary:
-    "Mobile Application Developer with 3+ years of experience specializing in Flutter, Android, iOS, and Flutter Web development, delivering scalable and user-centric applications.",
+    "Flutter developer building cross-platform applications for Android and iOS. Employment records on this site begin in August 2024.",
   heroDescription:
-    "I build, publish, and maintain production-ready mobile applications — from enterprise platforms to consumer apps on Google Play Store and Apple App Store. Skilled in clean architecture, AI-assisted development, and performance optimization.",
-  about: `I'm a Mobile Application Developer based in Dehradun, India, with 3+ years of hands-on experience building cross-platform applications using Flutter and Dart.
+    "I design, develop, optimize and ship cross-platform applications for Android and iOS, focusing on scalable architecture, performance and real-world product experiences.",
+  about: `I'm a mobile application developer based in Dehradun, India, building cross-platform applications with Flutter and Dart.
 
-Currently at Mindrops Solution Pvt Ltd, I publish and maintain production apps for Android and iOS — working across state management, animations, deep links, native integrations, and app store releases.
+At Mindrops Solution Pvt Ltd I work on production Android and iOS apps, including state management, animations, deep links, native integrations, and store releases.
 
-My work spans education platforms, enterprise rewards systems, AI-powered finance tools, logistics apps, and e-commerce solutions. I focus on responsive UI, REST API integration, Firebase, and delivering high-quality releases on schedule.`,
+Recorded product areas include education, enterprise rewards, document extraction, logistics, and e-commerce.`,
   industries: [
     "Education",
     "Finance & AI",
@@ -54,7 +54,7 @@ export const aboutTimeline: TimelineItem[] = [
     year: "2026",
     title: "Production App Specialist",
     description:
-      "Leading development on Ventuera, CAPTO, My Professional Rewards, and enterprise apps — from feature development to Play Store and App Store releases.",
+      "Production work on Ventuera, CAPTO, My Professional Rewards, and other Mindrops applications, including Play Store and App Store releases.",
   },
 ];
 

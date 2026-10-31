@@ -20,7 +20,7 @@ export default function BlogPage() {
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <Link
           href="/"
-          className="mb-8 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+          className="mb-8 inline-flex min-h-11 items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
         >
           <ArrowLeft className="h-4 w-4" />
           Back to Home

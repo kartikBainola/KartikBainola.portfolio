@@ -1,136 +1,92 @@
-import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import type { Project } from "@/types";
-import { ArchitectureDiagram } from "@/components/projects/architecture-diagram";
-import { ProjectVisual } from "@/components/ui/project-visual";
-import { getProjectLogo, getProjectScreenshots } from "@/lib/project-media";
-import { withBasePath } from "@/lib/utils";
+import { getCaseBlocks, type CaseBlock } from "@/data/case-studies";
+import { getProjectScreenshots } from "@/lib/project-media";
+import { ScreenshotGallery } from "@/components/ui/screenshot-gallery";
 
 interface ProjectCaseStudyProps {
   project: Project;
   nextProject?: Project;
 }
 
-const defaultArchitecture = [
-  "Flutter App",
-  "Presentation Layer",
-  "State Management",
-  "Repository Layer",
-  "API Client",
-  "REST API / Backend",
-];
-
-const fallbackItems = ["Details will be added as this case study evolves."];
-
 export function ProjectCaseStudy({ project, nextProject }: ProjectCaseStudyProps) {
+  const blocks = getCaseBlocks(project);
   const screenshots = getProjectScreenshots(project);
-  const logo = getProjectLogo(project);
-  const architecture = project.architecture?.length ? project.architecture : defaultArchitecture;
+  const beforeResults = blocks.filter((block) => block.title !== "Verified Results");
+  const results = blocks.find((block) => block.title === "Verified Results");
 
   return (
-    <article className="min-h-screen pt-24 pb-16">
+    <article className="pt-28 pb-20">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <Link
           href="/#projects"
-          className="mb-8 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+          className="inline-flex min-h-11 items-center gap-2 font-sans text-sm text-muted-foreground transition-colors duration-200 hover:text-foreground"
         >
           <ArrowLeft className="h-4 w-4" />
-          Back to Projects
+          Projects
         </Link>
 
-        <header className="rounded-3xl border border-border bg-card/80 p-5 sm:p-8">
-          <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground">{project.category.toUpperCase()}</p>
-          <h1 className="mt-2 text-2xl font-bold tracking-tight sm:text-4xl lg:text-5xl">{project.title}</h1>
-          <p className="mt-4 max-w-3xl text-muted-foreground">{project.longDescription}</p>
-          <div className="mt-5 flex flex-wrap gap-2">
+        <header className="mt-8 max-w-3xl">
+          <p className="font-sans text-xs tracking-[0.16em] text-accent uppercase">{project.category}</p>
+          <h1 className="mt-3 text-[clamp(2.25rem,8vw,3.75rem)]">{project.title}</h1>
+          <p className="mt-5 text-lg leading-relaxed text-muted-foreground">{project.description}</p>
+          <div className="mt-6 flex flex-wrap gap-2">
             {project.technologies.map((tech) => (
-              <span key={tech} className="rounded-full border border-border bg-muted/40 px-3 py-1 text-xs">
+              <span key={tech} className="rounded-md border border-border px-2.5 py-1 font-sans text-xs text-muted-foreground">
                 {tech}
               </span>
             ))}
           </div>
-          <div className="mt-7 flex flex-wrap gap-3">
+          <div className="mt-6 flex flex-wrap gap-x-4 gap-y-2 font-sans text-sm">
             {project.playStore && (
-              <a href={project.playStore} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-border px-4 py-2 text-sm hover:border-accent-blue/40">
-                <ExternalLink className="h-4 w-4" />
-                View on Google Play
+              <a href={project.playStore} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-1 text-foreground">
+                Google Play
+                <ArrowUpRight className="h-4 w-4" />
               </a>
             )}
             {project.appStore && (
-              <a href={project.appStore} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-border px-4 py-2 text-sm hover:border-accent-blue/40">
-                <ExternalLink className="h-4 w-4" />
-                View on App Store
+              <a href={project.appStore} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-1 text-foreground">
+                {project.appStore.includes("/search") ? "App Store search" : "App Store"}
+                <ArrowUpRight className="h-4 w-4" />
               </a>
             )}
           </div>
         </header>
 
-        {screenshots.length > 0 ? (
-          <section
-            className={
-              project.screenshotStyle === "poster"
-                ? "mt-10 grid gap-4 sm:grid-cols-2"
-                : "mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
-            }
-          >
-            {screenshots.map((image, index) => (
-              <div key={`${project.id}-${index}`} className="overflow-hidden rounded-2xl border border-border bg-card">
-                <div
-                  className={project.screenshotStyle === "poster" ? "relative aspect-[3/4]" : "relative aspect-[9/16]"}
-                  data-cursor="image"
-                >
-                  <Image
-                    src={withBasePath(image)}
-                    alt={`${project.title} screenshot ${index + 1}`}
-                    fill
-                    unoptimized
-                    sizes="(max-width: 1024px) 50vw, 30vw"
-                    className={project.screenshotStyle === "poster" ? "object-cover" : "object-cover object-top"}
-                  />
-                </div>
-              </div>
-            ))}
-          </section>
-        ) : (
-          <section className="mt-10 overflow-hidden rounded-3xl border border-border">
-            <ProjectVisual
-              title={project.title}
-              icon={logo}
-              color={project.color}
-              variant="featured"
-              className="h-72 sm:h-80"
-              logoBackground={project.logoBackground}
-            />
-          </section>
-        )}
+        <div className="mt-14 max-w-3xl space-y-12">
+          {beforeResults.map((block) => (
+            <CaseSection key={block.title} block={block} />
+          ))}
+        </div>
 
-        <section className="mt-12 grid gap-8 lg:grid-cols-2">
-          <div className="space-y-8">
-            <InfoBlock title="Overview" items={[project.description]} />
-            <InfoBlock title="My Role" items={[project.role ?? "Mobile application developer across architecture, implementation, and release support."]} />
-            <InfoBlock title="Key Features" items={project.features.length ? project.features : fallbackItems} />
-            <InfoBlock title="Challenges" items={project.challenges?.length ? project.challenges : fallbackItems} />
-            <InfoBlock title="Solutions" items={project.solutions?.length ? project.solutions : fallbackItems} />
-            <InfoBlock title="Results" items={project.results?.length ? project.results : fallbackItems} />
-          </div>
-          <div className="space-y-8">
-            <InfoBlock title="Technology" items={project.technologies} />
-            <ArchitectureDiagram title={`${project.title} Architecture`} layers={architecture} />
-          </div>
+        <section className="mt-14" aria-labelledby="screenshots-heading">
+          <h2 id="screenshots-heading" className="text-2xl sm:text-3xl">Screenshots and Visual Demonstrations</h2>
+          {screenshots.length > 0 ? (
+            <div className="mt-6">
+              <ScreenshotGallery images={screenshots} title={project.title} />
+            </div>
+          ) : (
+            <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+              Screenshots are not included for this project.
+            </p>
+          )}
         </section>
 
+        {results && (
+          <div className="mt-14 max-w-3xl">
+            <CaseSection block={results} />
+          </div>
+        )}
+
         {nextProject && (
-          <section className="mt-14 rounded-3xl border border-border bg-card/70 p-7">
-            <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground">NEXT PROJECT</p>
-            <h3 className="mt-2 text-2xl font-semibold">{nextProject.title}</h3>
-            <p className="mt-2 text-sm text-muted-foreground">{nextProject.description}</p>
-            <Link
-              href={`/projects/${nextProject.id}`}
-              className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-accent-blue"
-            >
+          <section className="mt-16 border-t border-border pt-8">
+            <p className="font-sans text-xs tracking-[0.16em] text-muted-foreground uppercase">Next</p>
+            <h2 className="mt-2 text-2xl sm:text-3xl">{nextProject.title}</h2>
+            <p className="mt-2 max-w-xl text-sm text-muted-foreground">{nextProject.description}</p>
+            <Link href={`/projects/${nextProject.id}`} className="mt-4 inline-flex min-h-11 items-center gap-1 font-sans text-sm text-foreground">
               Open case study
-              <ArrowRight className="h-4 w-4" />
+              <ArrowUpRight className="h-4 w-4" />
             </Link>
           </section>
         )}
@@ -139,18 +95,28 @@ export function ProjectCaseStudy({ project, nextProject }: ProjectCaseStudyProps
   );
 }
 
-function InfoBlock({ title, items }: { title: string; items: string[] }) {
+function CaseSection({ block }: { block: CaseBlock }) {
   return (
-    <div>
-      <h2 className="text-xl font-semibold">{title}</h2>
-      <ul className="mt-3 space-y-2">
-        {items.map((item) => (
-          <li key={`${title}-${item}`} className="flex items-start gap-2 text-sm text-muted-foreground">
-            <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-accent-blue" />
-            {item}
-          </li>
-        ))}
-      </ul>
-    </div>
+    <section>
+      <h2 className="text-2xl sm:text-3xl">{block.title}</h2>
+      {block.paragraphs.map((paragraph) => (
+        <p key={paragraph} className="mt-3 text-base leading-relaxed text-muted-foreground">
+          {paragraph}
+        </p>
+      ))}
+      {block.items && block.items.length > 0 && (
+        <ul className="mt-4 space-y-2">
+          {block.items.map((item) => (
+            <li key={item} className="flex gap-3 text-sm leading-relaxed text-foreground/90">
+              <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" />
+              {item}
+            </li>
+          ))}
+        </ul>
+      )}
+      {block.pending && block.paragraphs.length === 0 && !block.items?.length && (
+        <p className="mt-3 text-base leading-relaxed text-muted-foreground">{block.pending}</p>
+      )}
+    </section>
   );
 }

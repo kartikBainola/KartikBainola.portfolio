@@ -44,7 +44,7 @@ export function ServicesSection() {
     <section id="services" className="relative overflow-hidden bg-card/30 py-16 sm:py-24 lg:py-32">
       {/* Centered radial glow */}
       <div className="pointer-events-none absolute inset-x-0 top-1/2 flex -translate-y-1/2 justify-center">
-        <div className="h-[500px] w-[700px] rounded-full bg-accent-purple/5 blur-[120px]" />
+        <div className="h-[min(500px,70vw)] w-[min(700px,100%)] rounded-full bg-accent-purple/5 blur-[120px]" />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

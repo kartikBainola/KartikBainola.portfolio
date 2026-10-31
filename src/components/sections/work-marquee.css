@@ -1,0 +1,129 @@
+.screenshot-orbit {
+  --card-w: clamp(6.75rem, 20vw, 14rem);
+  --card-h: calc(var(--card-w) * 2.35);
+  --radius: calc(var(--card-w) * 6.85);
+  --perspective: var(--radius);
+  position: relative;
+  max-width: 100%;
+  overflow: clip;
+  padding: clamp(0.75rem, 2vh, 1.5rem) 0 clamp(1rem, 3vh, 2rem);
+  isolation: isolate;
+  pointer-events: none;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.screenshot-orbit__glow {
+  position: absolute;
+  left: 50%;
+  top: 58%;
+  z-index: 0;
+  width: min(1100px, 86vw);
+  height: 46%;
+  transform: translate(-50%, -40%);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(92, 146, 204, 0.28),
+    rgba(92, 146, 204, 0.07) 48%,
+    transparent 74%
+  );
+  pointer-events: none;
+}
+
+.light .screenshot-orbit__glow {
+  opacity: 0.45;
+}
+
+.screenshot-orbit__stage {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  height: calc(var(--card-h) + 1.25rem);
+  overflow: clip;
+  pointer-events: none;
+}
+
+.screenshot-orbit__scene {
+  width: var(--card-w);
+  height: var(--card-h);
+  perspective: var(--perspective);
+  perspective-origin: 50% 46%;
+}
+
+.screenshot-orbit__anchor,
+.screenshot-orbit__slot {
+  width: var(--card-w);
+  height: var(--card-h);
+  transform-style: preserve-3d;
+}
+
+.screenshot-orbit__anchor {
+  position: relative;
+  transform: translateZ(calc(var(--radius) * -1));
+  visibility: hidden;
+}
+
+.screenshot-orbit[data-ready] .screenshot-orbit__anchor {
+  visibility: visible;
+}
+
+.screenshot-orbit__slot {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.screenshot-orbit__card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: #101418;
+  box-shadow:
+    0 22px 48px rgba(0, 0, 0, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  user-select: none;
+}
+
+.light .screenshot-orbit__card {
+  border-color: rgba(20, 24, 28, 0.16);
+  box-shadow: 0 18px 40px rgba(20, 24, 28, 0.16);
+}
+
+.screenshot-orbit__card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+
+.screenshot-orbit__fade {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    var(--background) 0%,
+    color-mix(in srgb, var(--background) 55%, transparent) 10%,
+    transparent 24%,
+    transparent 76%,
+    color-mix(in srgb, var(--background) 55%, transparent) 90%,
+    var(--background) 100%
+  );
+}
+
+@media (max-width: 700px) {
+  .screenshot-orbit {
+    --card-w: clamp(5.5rem, 32vw, 8.5rem);
+  }
+}

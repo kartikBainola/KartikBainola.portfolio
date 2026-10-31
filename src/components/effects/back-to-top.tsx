@@ -27,7 +27,7 @@ export function BackToTop() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.8 }}
-          className="fixed bottom-4 right-4 z-50 sm:bottom-8 sm:right-8"
+          className="fixed right-4 bottom-[max(1rem,env(safe-area-inset-bottom,0px))] z-50 sm:right-8 sm:bottom-[max(2rem,env(safe-area-inset-bottom,0px))]"
         >
           <Button
             variant="secondary"

@@ -1,142 +1,57 @@
 "use client";
 
-import { FadeIn } from "@/components/animations/fade-in";
-import { SectionHeading } from "@/components/ui/section-heading";
-import { motion } from "framer-motion";
-import { Compass, Map, Pen, Code2, CheckCircle, Rocket } from "lucide-react";
+import { Reveal } from "@/components/animations/reveal";
 
-const steps = [
+const principles = [
   {
-    id: "01",
-    title: "DISCOVER",
-    description: "Understand the product goals, users, and business context.",
-    icon: Compass,
-    color: "from-blue-500 to-cyan-500",
-    glow: "rgba(59,130,246,0.2)",
+    title: "Scalable architecture",
+    body: "Ventuera records Riverpod. My Professional Rewards records Bloc. ResoluteAI records both. Clean architecture is named on CAPTO.",
   },
   {
-    id: "02",
-    title: "PLAN",
-    description: "Define architecture, feature scope, and delivery roadmap.",
-    icon: Map,
-    color: "from-violet-500 to-purple-500",
-    glow: "rgba(139,92,246,0.2)",
+    title: "Maintainable UI",
+    body: "Responsive layouts and reusable widgets are part of the ValueVertex and Mindrops notes, with custom animations recorded at ResoluteAI.",
   },
   {
-    id: "03",
-    title: "DESIGN",
-    description: "Craft UI/UX flows and interaction details before implementation.",
-    icon: Pen,
-    color: "from-pink-500 to-rose-500",
-    glow: "rgba(244,63,94,0.2)",
+    title: "API integration",
+    body: "REST APIs are recorded on Ventuera, CAPTO, and My Professional Rewards. Firebase is recorded on Ventuera and CAPTO.",
   },
   {
-    id: "04",
-    title: "BUILD",
-    description: "Implement clean Flutter code with maintainable feature boundaries.",
-    icon: Code2,
-    color: "from-emerald-500 to-teal-500",
-    glow: "rgba(16,185,129,0.2)",
+    title: "Performance work",
+    body: "Performance optimization is named on Ventuera, CAPTO, My Professional Rewards, and the ResoluteAI role. No benchmark numbers are stored here.",
   },
   {
-    id: "05",
-    title: "TEST",
-    description: "Validate APIs, devices, and edge cases for release confidence.",
-    icon: CheckCircle,
-    color: "from-orange-500 to-amber-500",
-    glow: "rgba(245,158,11,0.2)",
+    title: "Production releases",
+    body: "Ventuera and My Professional Rewards have Play Store and App Store listings. CAPTO has a Play Store listing. Mindrops notes include store releases.",
   },
   {
-    id: "06",
-    title: "LAUNCH",
-    description: "Ship to Play Store/App Store and monitor post-release quality.",
-    icon: Rocket,
-    color: "from-red-500 to-pink-500",
-    glow: "rgba(239,68,68,0.2)",
+    title: "Defect fixing",
+    body: "Bug fixes are recorded on My Professional Rewards. A test plan or coverage figure is not documented, so this site does not claim a testing practice beyond that.",
   },
 ];
 
 export function ProcessSection() {
   return (
-    <section id="process" className="relative overflow-hidden py-16 sm:py-24 lg:py-32">
-      {/* Background */}
-      <div className="pointer-events-none absolute inset-0 dot-pattern opacity-20" />
+    <section id="approach" className="border-t border-border py-20 sm:py-28">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <Reveal className="max-w-2xl">
+          <p className="font-sans text-xs tracking-[0.16em] text-accent uppercase">Engineering approach</p>
+          <h2 className="mt-3 text-[clamp(2rem,6vw,3rem)]">How the recorded work was built</h2>
+          <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+            Each point is tied to a project or role already on this site.
+          </p>
+        </Reveal>
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <SectionHeading
-          label="How I Work"
-          title="From Idea to Production"
-          description="A predictable process that keeps product quality and delivery speed aligned."
-        />
-
-        {/* Desktop: horizontal flow */}
-        <div className="relative hidden gap-4 lg:grid lg:grid-cols-6">
-          <div className="pointer-events-none absolute left-[8%] right-[8%] top-7 h-px bg-gradient-to-r from-accent-blue/40 via-accent-purple/40 to-accent-cyan/40" />
-          {steps.map((step, index) => {
-            const Icon = step.icon;
-            return (
-              <FadeIn key={step.id} delay={index * 0.07}>
-                <motion.div
-                  whileHover={{ y: -6, scale: 1.02 }}
-                  className="group relative h-full"
-                >
-                  {/* Connector line */}
-                  {index < steps.length - 1 && (
-                    <div className="absolute -right-2 top-7 z-20 h-px w-4 bg-gradient-to-r from-accent-blue/40 to-transparent" />
-                  )}
-
-                  <div className="relative overflow-hidden rounded-xl border border-border bg-card/80 p-5 pt-6 transition-all duration-300 group-hover:border-transparent gradient-border-hover">
-                    {/* Gradient glow bg on hover */}
-                    <div
-                      className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                      style={{ background: `radial-gradient(circle at 50% 0%, ${step.glow} 0%, transparent 70%)` }}
-                    />
-
-                    {/* Icon with gradient */}
-                    <div className={`relative mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${step.color} shadow-lg transition-transform duration-300 group-hover:scale-110`}>
-                      <Icon className="h-5 w-5 text-white" />
-                    </div>
-
-                    {/* Step number */}
-                    <p className={`mb-1.5 text-[10px] font-black tracking-[0.25em] bg-gradient-to-r ${step.color} bg-clip-text text-transparent`}>
-                      {step.id}
-                    </p>
-                    <h3 className="text-sm font-bold">{step.title}</h3>
-                    <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{step.description}</p>
-                  </div>
-                </motion.div>
-              </FadeIn>
-            );
-          })}
-        </div>
-
-        {/* Mobile: vertical timeline */}
-        <div className="relative space-y-0 lg:hidden">
-          {/* Vertical line */}
-          <div className="absolute left-6 top-4 bottom-4 w-px bg-gradient-to-b from-accent-blue via-accent-purple to-accent-cyan/40" />
-
-          {steps.map((step, index) => {
-            const Icon = step.icon;
-            return (
-              <FadeIn key={step.id} delay={index * 0.06}>
-                <div className="relative flex gap-5 pb-6 last:pb-0">
-                  {/* Icon node */}
-                  <div className={`relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${step.color} shadow-lg`}>
-                    <Icon className="h-5 w-5 text-white" />
-                  </div>
-
-                  <div className="flex-1 rounded-2xl border border-border bg-card/80 p-4">
-                    <p className={`text-[10px] font-black tracking-[0.25em] bg-gradient-to-r ${step.color} bg-clip-text text-transparent mb-1`}>
-                      {step.id}
-                    </p>
-                    <h3 className="text-sm font-bold">{step.title}</h3>
-                    <p className="mt-1 text-xs text-muted-foreground leading-relaxed">{step.description}</p>
-                  </div>
-                </div>
-              </FadeIn>
-            );
-          })}
-        </div>
+        <ol className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
+          {principles.map((item, index) => (
+            <li key={item.title} className="min-w-0 bg-card p-5 sm:p-7">
+              <Reveal delay={index * 70} className="h-full">
+              <p className="font-sans text-xs text-muted-foreground">{String(index + 1).padStart(2, "0")}</p>
+              <h3 className="mt-3 text-2xl">{item.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{item.body}</p>
+              </Reveal>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   );

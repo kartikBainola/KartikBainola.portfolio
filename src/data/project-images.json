@@ -1,60 +1,107 @@
 {
   "ventuera": {
     "icon": "images/projects/ventuera-icon.png",
-    "screenshot": "images/projects/ventuera-promo-1.png",
+    "screenshot": "images/screenshots/ventuera/iphone 4.png",
     "screenshots": [
-      "images/projects/ventuera-promo-1.png",
-      "images/projects/ventuera-promo-2.png",
-      "images/projects/ventuera-promo-3.png",
-      "images/projects/ventuera-promo-4.png"
+      "images/screenshots/ventuera/iphone 4.png",
+      "images/screenshots/ventuera/iphone 2 (2688 x 1242 px).png",
+      "images/screenshots/ventuera/android designs.png",
+      "images/screenshots/ventuera/android designs (1).png"
     ]
   },
   "capto": {
-    "icon": "images/projects/capto-icon.png",
-    "screenshot": "images/projects/capto-screenshot.png",
+    "icon": "images/projects/Capto Logo.png",
+    "screenshot": "images/screenshots/capto/1.jpeg",
     "screenshots": [
-      "images/projects/capto-screenshot.png",
-      "images/projects/capto-screenshot-2.png",
-      "images/projects/capto-screenshot-3.png",
-      "images/projects/capto-screenshot-4.png",
-      "images/projects/capto-screenshot-5.png",
-      "images/projects/capto-screenshot-6.png"
+      "images/screenshots/capto/1.jpeg",
+      "images/screenshots/capto/2.jpeg",
+      "images/screenshots/capto/3.jpeg",
+      "images/screenshots/capto/4.jpeg",
+      "images/screenshots/capto/5.jpeg",
+      "images/screenshots/capto/6.jpeg",
+      "images/screenshots/capto/7.jpeg",
+      "images/screenshots/capto/8.jpeg",
+      "images/screenshots/capto/9.jpeg",
+      "images/screenshots/capto/WhatsApp Image 2026-10-31 at 7.59.41 PM.jpeg"
     ]
   },
   "my-professional-rewards": {
     "icon": "images/projects/my-professional-rewards-icon.png",
-    "screenshot": "images/projects/my-professional-rewards-promo-1.png",
+    "screenshot": "images/screenshots/My Professional rewards/1.jpeg",
     "screenshots": [
-      "images/projects/my-professional-rewards-promo-1.png",
-      "images/projects/my-professional-rewards-promo-2.png",
-      "images/projects/my-professional-rewards-promo-3.png",
-      "images/projects/my-professional-rewards-promo-4.png"
+      "images/screenshots/My Professional rewards/1.jpeg",
+      "images/screenshots/My Professional rewards/2.jpeg",
+      "images/screenshots/My Professional rewards/3.jpeg",
+      "images/screenshots/My Professional rewards/4.jpeg",
+      "images/screenshots/My Professional rewards/WhatsApp Image 2026-10-31 at 7.59.45 PM.jpeg"
     ]
   },
   "vrv-hospitality": {
     "icon": "images/projects/vrv-hospitality-icon.png",
-    "screenshot": "images/projects/vrv-hospitality-screenshot-3.png",
+    "screenshot": "images/screenshots/VRV/Img 1.jpg",
     "screenshots": [
-      "images/projects/vrv-hospitality-screenshot-3.png"
+      "images/screenshots/VRV/Img 1.jpg",
+      "images/screenshots/VRV/img 2.jpg",
+      "images/screenshots/VRV/img 3.jpg",
+      "images/screenshots/VRV/img 4.jpg",
+      "images/screenshots/VRV/img 5.jpg",
+      "images/screenshots/VRV/login.png",
+      "images/screenshots/VRV/verify.png",
+      "images/screenshots/VRV/list.png",
+      "images/screenshots/VRV/upload.png",
+      "images/screenshots/VRV/ai-process.png",
+      "images/screenshots/VRV/extracted data.png"
     ]
   },
   "expense-management": {
-    "icon": "images/projects/expense-management-icon.png",
-    "screenshot": "images/projects/expense-management-screenshot-2.png",
+    "icon": "images/projects/Expenseapp_icon.png",
+    "screenshot": "images/screenshots/Expense Management/1.jpeg",
     "screenshots": [
-      "images/projects/expense-management-screenshot-2.png"
+      "images/screenshots/Expense Management/1.jpeg",
+      "images/screenshots/Expense Management/2.jpeg",
+      "images/screenshots/Expense Management/3.jpeg",
+      "images/screenshots/Expense Management/4.jpeg",
+      "images/screenshots/Expense Management/5.jpeg",
+      "images/screenshots/Expense Management/6.jpeg",
+      "images/screenshots/Expense Management/7.jpeg",
+      "images/screenshots/Expense Management/WhatsApp Image 2026-10-31 at 9.18.32 PM.jpeg"
     ]
   },
   "footprint-warehousing": {
     "icon": "images/projects/footprint-warehousing-icon.png",
-    "screenshot": "images/projects/footprint-warehousing-screenshot-2.png",
+    "screenshot": "images/screenshots/Footprint/image1.jpeg",
     "screenshots": [
-      "images/projects/footprint-warehousing-screenshot-2.png"
+      "images/screenshots/Footprint/image1.jpeg",
+      "images/screenshots/Footprint/image2.jpeg",
+      "images/screenshots/Footprint/image3.jpeg",
+      "images/screenshots/Footprint/image4.jpeg",
+      "images/screenshots/Footprint/image5.jpeg"
     ]
   },
   "sardar-meat-shop": {
     "icon": "images/projects/sardar-meat-shop-icon.png",
     "screenshot": "images/projects/sardar-meat-shop-icon.png",
     "screenshots": []
+  },
+  "caelum-ai": {
+    "icon": "images/projects/Caelumapp_icon.png",
+    "screenshot": "images/screenshots/Caelum AI/1.jpeg",
+    "screenshots": [
+      "images/screenshots/Caelum AI/1.jpeg",
+      "images/screenshots/Caelum AI/2.jpeg",
+      "images/screenshots/Caelum AI/3.jpeg",
+      "images/screenshots/Caelum AI/4.jpeg",
+      "images/screenshots/Caelum AI/WhatsApp Image 2026-10-31 at 7.59.44 PM.jpeg"
+    ]
+  },
+  "face-attendance": {
+    "icon": "images/projects/face-attendance-icon.png",
+    "screenshot": "images/screenshots/Face Attendance/1.jpeg",
+    "screenshots": [
+      "images/screenshots/Face Attendance/1.jpeg",
+      "images/screenshots/Face Attendance/2.jpeg",
+      "images/screenshots/Face Attendance/3.jpeg",
+      "images/screenshots/Face Attendance/WhatsApp Image 2026-10-31 at 8.01.46 PM.jpeg"
+    ]
   }
 }
